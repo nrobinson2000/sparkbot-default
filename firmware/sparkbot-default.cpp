@@ -46,6 +46,14 @@ void startup()
   pinMode(rightbutton, INPUT);  //We define the two button pins as inputs.
   pinMode(leftbutton, INPUT);
 
+  pinMode(redled, OUTPUT);
+  pinMode(blueled, OUTPUT);
+  pinMode(greenled, OUTPUT);
+
+  pinMode(buzzer, OUTPUT);
+
+  pinMode(microphone, INPUT);
+
   neckservo.write(90); // Reset servos and read the values.
   neckAngle = neckservo.read();
   rightservo.write(90);
@@ -177,4 +185,14 @@ void moveRight(int value)
 void moveLeft(int value)
 {
   leftservo.write(value);
+}
+
+void playBuzzer(int value)
+{
+  analogWrite(buzzer, value)
+}
+
+void stopBuzzer(int value)
+{
+  analogWrite(buzzer, 0)
 }
