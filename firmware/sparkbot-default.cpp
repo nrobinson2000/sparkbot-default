@@ -1,4 +1,5 @@
 #include "sparkbot-default.h"
+#include "application.h"
 
 Servo rightservo;
 Servo leftservo;
