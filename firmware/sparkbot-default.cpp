@@ -196,3 +196,50 @@ void stopBuzzer(int value)
 {
   analogWrite(buzzer, 0)
 }
+
+
+
+
+
+
+void moveNeckSlave(const char *event, const char *data)
+{
+  neckservo.write(atoi(data));
+  return;
+}
+
+void moveRightSlave(const char *event, const char *data)
+{
+  rightservo.write(atoi(data));
+  return;
+}
+
+void moveLeftSlave(const char *event, const char *data)
+{
+  leftservo.write(atoi(data));
+  return;
+}
+
+void redLedSlave(const char *event, const char *data)
+{
+  digitalWrite(redled, HIGH);
+  digitalWrite(blueled, LOW);
+  digitalWrite(greenled, LOW);
+  return;
+}
+
+void blueLedSlave(const char *event, const char *data)
+{
+  digitalWrite(redled, LOW);
+  digitalWrite(blueled, HIGH);
+  digitalWrite(greenled, LOW);
+  return;
+}
+
+void greenLedSlave(const char *event, const char *data)
+{
+  digitalWrite(redled, LOW);
+  digitalWrite(blueled, LOW);
+  digitalWrite(greenled, HIGH);
+  return;
+}
