@@ -192,7 +192,7 @@ void playBuzzer(int value)
   analogWrite(buzzer, value)
 }
 
-void stopBuzzer(int value)
+void stopBuzzer()
 {
   analogWrite(buzzer, 0)
 }
