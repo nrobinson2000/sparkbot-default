@@ -198,7 +198,15 @@ void stopBuzzer(int value)
 }
 
 
-
+void startSlave()
+{
+Spark.subscribe("moveNeck", moveNeckSlave);
+Spark.subscribe("moveRight", moveRightSlave);
+Spark.subscribe("moveLeft", moveLeftSlave);
+Spark.subscribe("redLed", redLedSlave);
+Spark.subscribe("blueLed", blueLedSlave);
+Spark.subscribe("greenLed", greenLedSlave);
+}
 
 
 
