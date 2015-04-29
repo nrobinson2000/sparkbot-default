@@ -2,8 +2,12 @@
 #define sparkbot_default_h
 
 void startup();
+
+/* Fix this later
 void enableRightButton(voidFuncPtr handler);
 void enableLeftButton(voidFuncPtr handler);
+*/
+
 void switchLights();
 void red();
 void blue();
