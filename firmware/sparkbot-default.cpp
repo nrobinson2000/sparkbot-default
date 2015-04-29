@@ -63,12 +63,12 @@ void startup()
   leftArmAngle = leftservo.read();
 }
 
-void enableRightButton(const char handler)
+void enableRightButton(voidFuncPtr handler)
 {
   attachInterrupt(rightbutton, handler, RISING);
 }
 
-void enableLeftButton(const char handler)
+void enableLeftButton(voidFuncPtr handler)
 {
   attachInterrupt(leftbutton, handler, RISING);
 
