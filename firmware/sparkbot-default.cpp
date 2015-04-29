@@ -63,6 +63,7 @@ void startup()
   leftArmAngle = leftservo.read();
 }
 
+/* Fix this later
 void enableRightButton(voidFuncPtr handler)
 {
   attachInterrupt(rightbutton, handler, RISING);
@@ -73,6 +74,7 @@ void enableLeftButton(voidFuncPtr handler)
   attachInterrupt(leftbutton, handler, RISING);
 
 }
+*/
 
 void switchLights()
 {
