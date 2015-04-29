@@ -190,12 +190,12 @@ void moveLeft(int value)
 
 void playBuzzer(int value)
 {
-  analogWrite(buzzer, value)
+  analogWrite(buzzer, value);
 }
 
 void stopBuzzer()
 {
-  analogWrite(buzzer, 0)
+  analogWrite(buzzer, 0);
 }
 
 
