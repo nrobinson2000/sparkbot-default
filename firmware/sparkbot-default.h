@@ -2,8 +2,8 @@
 #define sparkbot_default_h
 
 void startup();
-void enableRightButton(const char *handler);
-void enableLeftButton(const char *handler);
+void enableRightButton(voidFuncPtr handler);
+void enableLeftButton(voidFuncPtr handler);
 void switchLights();
 void red();
 void blue();
