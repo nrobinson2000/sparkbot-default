@@ -3,3 +3,4 @@
 
 ###Todo:
 * Clean up the .cpp and .h files.
+* Complete the .h file with more declarations
