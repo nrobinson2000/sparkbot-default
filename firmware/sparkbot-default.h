@@ -3,31 +3,31 @@
 
 // Global variables
 
-neckAngle;
-rightArmAngle;
-leftArmAngle;
+int neckAngle;
+int rightArmAngle;
+int leftArmAngle;
 
-rightbutton;
-leftbutton;
+int rightbutton;
+int leftbutton;
 
-redled;
-blueled;
-greenled;
+int redled;
+int blueled;
+int greenled;
 
-redledOn;
-blueledOn;
-greenledOn;
+bool redledOn;
+bool blueledOn;
+bool greenledOn;
 
-temperature;
-microphone;
+int temperature;
+int microphone;
 
-buzzer;
+int buzzer;
 
-io1;
-io2;
-io3;
+int io1;
+int io2;
+int io3;
 
-choice;
+int choice;
 
 
 // Functions
