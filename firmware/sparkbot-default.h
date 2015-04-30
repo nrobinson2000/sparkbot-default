@@ -1,6 +1,37 @@
 #ifndef sparkbot_default_h
 #define sparkbot_default_h
 
+// Global variables
+
+int neckAngle;
+int rightArmAngle;
+int leftArmAngle;
+
+int rightbutton;
+int leftbutton;
+
+int redled;
+int blueled;
+int greenled;
+
+bool redledOn;
+bool blueledOn;
+bool greenledOn;
+
+int temperature;
+int microphone;
+
+int buzzer;
+
+int io1;
+int io2;
+int io3;
+
+int choice;
+
+
+// Functions
+
 void startup();
 
 /* Fix this later
