@@ -6,9 +6,10 @@ class sparkbot
 {
 private:
   //Nothing
-  sparkbot() { } // private default constructor
 
 public:
+
+  sparkbot();
 
   int neckAngle;
   int rightArmAngle;
