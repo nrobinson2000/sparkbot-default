@@ -2,7 +2,7 @@
 #define sparkbot_default_h
 
 
-class sparkbot
+class sparkbot-default
 {
 private:
   //Nothing
