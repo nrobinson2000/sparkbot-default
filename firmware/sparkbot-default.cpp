@@ -5,38 +5,44 @@ Servo rightservo;
 Servo leftservo;
 Servo neckservo;
 
-// Servo angles
-int neckAngle = 0;
-int rightArmAngle = 0;
-int leftArmAngle = 0;
+sparkbot::sparkbot()
+{
+  // Servo angles
+  neckAngle = 0;
+  rightArmAngle = 0;
+  leftArmAngle = 0;
 
-// Buttons
-int rightbutton = D7;
-int leftbutton = A5;
+  // Buttons
+  rightbutton = D7;
+  leftbutton = A5;
 
-// LED Pins
-int redled = D4;
-int blueled = D5;
-int greenled = D6;
+  // LED Pins
+  redled = D4;
+  blueled = D5;
+  greenled = D6;
 
-// LED Booleans
-bool redledOn = false;
-bool blueledOn = false;
-bool greenledOn = false;
+  // LED Booleans
+  redledOn = false;
+  blueledOn = false;
+  greenledOn = false;
 
-// Sensor Pins
-int temperature = D3;
-int microphone = A1;
+  // Sensor Pins
+  temperature = D3;
+  microphone = A1;
 
-// Other Pins
-int buzzer = A0;
+  // Other Pins
+  buzzer = A0;
 
-// I/O pins
-int io1 = A2;
-int io2 = A3;
-int io3 = A4;
+  // I/O pins
+  io1 = A2;
+  io2 = A3;
+  io3 = A4;
 
-int choice = 0; // Used for random tests
+  choice = 0; // Used for random tests
+  
+
+}
+
 
 void sparkbot::startup()
 {
