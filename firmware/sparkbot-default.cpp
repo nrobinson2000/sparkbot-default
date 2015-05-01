@@ -189,7 +189,7 @@ void stopBuzzer()
 }
 
 
-void moveNeckSlave(const char *event, const char *data)
+/* void moveNeckSlave(const char *event, const char *data)
 {
   neckservo.write(atoi(data));
   return;
@@ -231,7 +231,7 @@ void greenLedSlave(const char *event, const char *data)
   return;
 }
 
-/*void startSlave()
+void startSlave()
 {
 Spark.subscribe("moveNeck", moveNeckSlave);
 Spark.subscribe("moveRight", moveRightSlave);
