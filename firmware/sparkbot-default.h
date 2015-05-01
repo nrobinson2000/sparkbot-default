@@ -45,7 +45,7 @@ public:
   void green();
 
   void syncLights();
-  void syncServos();
+  void syncServos2();
 
   void moveNeck(int value);
   void moveRight(int value);
