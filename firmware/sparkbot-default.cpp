@@ -32,11 +32,11 @@ int microphone = A1;
 int buzzer = A0;
 
 // I/O pins
-io1 = A2;
-io2 = A3;
-io3 = A4;
+int io1 = A2;
+int io2 = A3;
+int io3 = A4;
 
-choice = 0; // Used for random tests
+int choice = 0; // Used for random tests
 
 void startup()
 {
