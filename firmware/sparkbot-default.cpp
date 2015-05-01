@@ -151,7 +151,7 @@ void sparkbot::syncLights()
   }
 }
 
-void sparkbot::syncServos2()
+void sparkbot::syncServos()
 {
   if (neckAngle != neckservo.read())
   {
