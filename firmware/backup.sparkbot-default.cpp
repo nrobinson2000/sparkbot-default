@@ -6,37 +6,37 @@ Servo leftservo;
 Servo neckservo;
 
 // Servo angles
-neckAngle = 0;
-rightArmAngle = 0;
-leftArmAngle = 0;
+int neckAngle = 0;
+int rightArmAngle = 0;
+int leftArmAngle = 0;
 
 // Buttons
-rightbutton = D7;
-leftbutton = A5;
+int rightbutton = D7;
+int leftbutton = A5;
 
 // LED Pins
-redled = D4;
-blueled = D5;
-greenled = D6;
+int redled = D4;
+int blueled = D5;
+int greenled = D6;
 
 // LED Booleans
-redledOn = false;
-blueledOn = false;
-greenledOn = false;
+bool redledOn = false;
+bool blueledOn = false;
+bool greenledOn = false;
 
 // Sensor Pins
-temperature = D3;
-microphone = A1;
+int temperature = D3;
+int microphone = A1;
 
 // Other Pins
-buzzer = A0;
+int buzzer = A0;
 
 // I/O pins
-io1 = A2;
-io2 = A3;
-io3 = A4;
+int io1 = A2;
+int io2 = A3;
+int io3 = A4;
 
-choice = 0; // Used for random tests
+int choice = 0; // Used for random tests
 
 void startup()
 {
@@ -63,6 +63,18 @@ void startup()
   leftArmAngle = leftservo.read();
 }
 
+/* Fix this later
+void enableRightButton(voidFuncPtr handler)
+{
+  attachInterrupt(rightbutton, handler, RISING);
+}
+
+void enableLeftButton(voidFuncPtr handler)
+{
+  attachInterrupt(leftbutton, handler, RISING);
+
+}
+*/
 
 void switchLights()
 {
