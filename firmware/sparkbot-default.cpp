@@ -6,30 +6,30 @@ Servo leftservo;
 Servo neckservo;
 
 // Servo angles
-neckAngle = 0;
-rightArmAngle = 0;
-leftArmAngle = 0;
+int neckAngle = 0;
+int rightArmAngle = 0;
+int leftArmAngle = 0;
 
 // Buttons
-rightbutton = D7;
-leftbutton = A5;
+int rightbutton = D7;
+int leftbutton = A5;
 
 // LED Pins
-redled = D4;
-blueled = D5;
-greenled = D6;
+int redled = D4;
+int blueled = D5;
+int greenled = D6;
 
 // LED Booleans
-redledOn = false;
-blueledOn = false;
-greenledOn = false;
+bool redledOn = false;
+bool blueledOn = false;
+bool greenledOn = false;
 
 // Sensor Pins
-temperature = D3;
-microphone = A1;
+int temperature = D3;
+int microphone = A1;
 
 // Other Pins
-buzzer = A0;
+int buzzer = A0;
 
 // I/O pins
 io1 = A2;
@@ -189,7 +189,7 @@ void stopBuzzer()
 }
 
 
-/* void moveNeckSlave(const char *event, const char *data)
+void moveNeckSlave(const char *event, const char *data)
 {
   neckservo.write(atoi(data));
   return;
@@ -239,4 +239,4 @@ Spark.subscribe("moveLeft", moveLeftSlave);
 Spark.subscribe("redLed", redLedSlave);
 Spark.subscribe("blueLed", blueLedSlave);
 Spark.subscribe("greenLed", greenLedSlave);
-}*/
+}
