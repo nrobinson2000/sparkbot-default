@@ -6,6 +6,7 @@ class sparkbot
 {
 private:
   //Nothing
+  sparkbot() { } // private default constructor
 
 public:
 
@@ -51,7 +52,7 @@ public:
 
   void playBuzzer(int value);
   void stopBuzzer();
-/*
+
   void moveNeckSlave(const char *event, const char *data);
   void moveRightSlave(const char *event, const char *data);
   void moveLeftSlave(const char *event, const char *data);
@@ -59,7 +60,6 @@ public:
   void blueLedSlave(const char *event, const char *data);
   void greenLedSlave(const char *event, const char *data);
   void startSlave();
-  */
 
 };
 #endif

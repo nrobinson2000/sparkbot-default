@@ -38,7 +38,7 @@ int io3 = A4;
 
 int choice = 0; // Used for random tests
 
-void startup()
+void sparkbot::startup()
 {
   rightservo.attach(D0); //Here we attach the three servos
   leftservo.attach(D1);
@@ -64,7 +64,7 @@ void startup()
 }
 
 
-void switchLights()
+void sparkbot::switchLights()
 {
   if (choice == 0)
   {
@@ -103,28 +103,28 @@ void switchLights()
   }
 }
 
-void red() //This function turns on the red, and turns off the blue and green
+void sparkbot::red() //This function turns on the red, and turns off the blue and green
 {
    digitalWrite(redled, HIGH);
    digitalWrite(blueled, LOW);
    digitalWrite(greenled, LOW);
 }
 
-void blue() //This function turns on the blue, and turns off the red and green
+void sparkbot::blue() //This function turns on the blue, and turns off the red and green
 {
   digitalWrite(blueled, HIGH);
   digitalWrite(redled, LOW);
   digitalWrite(greenled, LOW);
 }
 
-void green() //This function turns on the green, and turns off the red and blue
+void sparkbot::green() //This function turns on the green, and turns off the red and blue
 {
     digitalWrite(greenled, HIGH);
     digitalWrite(redled, LOW);
     digitalWrite(blueled, LOW);
 }
 
-void syncLights()
+void sparkbot::syncLights()
 {
   if (redledOn == true)
   {
@@ -145,7 +145,7 @@ void syncLights()
   }
 }
 
-void syncServos()
+void sparkbot::syncServos()
 {
   if (neckAngle != neckservo.read())
   {
@@ -163,51 +163,51 @@ void syncServos()
   }
 }
 
-void moveNeck(int value)
+void sparkbot::moveNeck(int value)
 {
   neckservo.write(value);
 }
 
-void moveRight(int value)
+void sparkbot::moveRight(int value)
 {
   rightservo.write(value);
 }
 
-void moveLeft(int value)
+void sparkbot::moveLeft(int value)
 {
   leftservo.write(value);
 }
 
-void playBuzzer(int value)
+void sparkbot::playBuzzer(int value)
 {
   analogWrite(buzzer, value);
 }
 
-void stopBuzzer()
+void sparkbot::stopBuzzer()
 {
   analogWrite(buzzer, 0);
 }
 
 
-void moveNeckSlave(const char *event, const char *data)
+void sparkbot::moveNeckSlave(const char *event, const char *data)
 {
   neckservo.write(atoi(data));
   return;
 }
 
-void moveRightSlave(const char *event, const char *data)
+void sparkbot::moveRightSlave(const char *event, const char *data)
 {
   rightservo.write(atoi(data));
   return;
 }
 
-void moveLeftSlave(const char *event, const char *data)
+void sparkbot::moveLeftSlave(const char *event, const char *data)
 {
   leftservo.write(atoi(data));
   return;
 }
 
-void redLedSlave(const char *event, const char *data)
+void sparkbot::redLedSlave(const char *event, const char *data)
 {
   digitalWrite(redled, HIGH);
   digitalWrite(blueled, LOW);
@@ -215,7 +215,7 @@ void redLedSlave(const char *event, const char *data)
   return;
 }
 
-void blueLedSlave(const char *event, const char *data)
+void sparkbot::blueLedSlave(const char *event, const char *data)
 {
   digitalWrite(redled, LOW);
   digitalWrite(blueled, HIGH);
@@ -223,7 +223,7 @@ void blueLedSlave(const char *event, const char *data)
   return;
 }
 
-void greenLedSlave(const char *event, const char *data)
+void sparkbot::greenLedSlave(const char *event, const char *data)
 {
   digitalWrite(redled, LOW);
   digitalWrite(blueled, LOW);
@@ -231,7 +231,7 @@ void greenLedSlave(const char *event, const char *data)
   return;
 }
 
-void startSlave()
+void sparkbot::startSlave()
 {
 Spark.subscribe("moveNeck", moveNeckSlave);
 Spark.subscribe("moveRight", moveRightSlave);
