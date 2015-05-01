@@ -2,7 +2,7 @@
 #define sparkbot_default_h
 
 
-class sparkbot-default
+class sparkbot
 {
 private:
   //Nothing
@@ -52,13 +52,14 @@ public:
   void playBuzzer(int value);
   void stopBuzzer();
 
-  void startSlave();
+
   void moveNeckSlave(const char *event, const char *data);
   void moveRightSlave(const char *event, const char *data);
   void moveLeftSlave(const char *event, const char *data);
   void redLedSlave(const char *event, const char *data);
   void blueLedSlave(const char *event, const char *data);
   void greenLedSlave(const char *event, const char *data);
+  void startSlave();
 
 };
 #endif

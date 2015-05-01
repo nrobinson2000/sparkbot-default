@@ -189,18 +189,6 @@ void stopBuzzer()
 }
 
 
-void startSlave()
-{
-Spark.subscribe("moveNeck", moveNeckSlave);
-Spark.subscribe("moveRight", moveRightSlave);
-Spark.subscribe("moveLeft", moveLeftSlave);
-Spark.subscribe("redLed", redLedSlave);
-Spark.subscribe("blueLed", blueLedSlave);
-Spark.subscribe("greenLed", greenLedSlave);
-}
-
-
-
 void moveNeckSlave(const char *event, const char *data)
 {
   neckservo.write(atoi(data));
@@ -241,4 +229,14 @@ void greenLedSlave(const char *event, const char *data)
   digitalWrite(blueled, LOW);
   digitalWrite(greenled, HIGH);
   return;
+}
+
+void startSlave()
+{
+Spark.subscribe("moveNeck", moveNeckSlave);
+Spark.subscribe("moveRight", moveRightSlave);
+Spark.subscribe("moveLeft", moveLeftSlave);
+Spark.subscribe("redLed", redLedSlave);
+Spark.subscribe("blueLed", blueLedSlave);
+Spark.subscribe("greenLed", greenLedSlave);
 }
