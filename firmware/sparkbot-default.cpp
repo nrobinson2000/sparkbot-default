@@ -239,10 +239,10 @@ void sparkbot::greenLedSlave(const char *event, const char *data)
 
 void sparkbot::startSlave()
 {
-Spark.subscribe("moveNeck", moveNeckSlave);
-Spark.subscribe("moveRight", moveRightSlave);
-Spark.subscribe("moveLeft", moveLeftSlave);
-Spark.subscribe("redLed", redLedSlave);
-Spark.subscribe("blueLed", blueLedSlave);
-Spark.subscribe("greenLed", greenLedSlave);
+Spark.subscribe("moveNeck", sparkbot::moveNeckSlave);
+Spark.subscribe("moveRight", sparkbot::moveRightSlave);
+Spark.subscribe("moveLeft", sparkbot::moveLeftSlave);
+Spark.subscribe("redLed", sparkbot::redLedSlave);
+Spark.subscribe("blueLed", sparkbot::blueLedSlave);
+Spark.subscribe("greenLed", sparkbot::greenLedSlave);
 }
