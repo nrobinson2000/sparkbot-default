@@ -57,9 +57,7 @@ public:
   void moveNeckSlave(const char *event, const char *data);
   void moveRightSlave(const char *event, const char *data);
   void moveLeftSlave(const char *event, const char *data);
-  void redLedSlave(const char *event, const char *data);
-  void blueLedSlave(const char *event, const char *data);
-  void greenLedSlave(const char *event, const char *data);
+  void RGBSlave(const char *event, const char *data);
   void initiateSlave();
   float getTempC();
 

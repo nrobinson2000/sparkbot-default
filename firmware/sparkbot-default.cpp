@@ -111,44 +111,54 @@ void sparkbot::switchLights()
 
 void sparkbot::red() //This function turns on the red, and turns off the blue and green
 {
-   digitalWrite(redled, HIGH);
-   digitalWrite(blueled, LOW);
-   digitalWrite(greenled, LOW);
+  digitalWrite(redled, HIGH);
+  redledOn = true;
+  digitalWrite(blueled, LOW);
+  blueledOn = false;
+  digitalWrite(greenled, LOW);
+  greenledOn = false;
 }
 
 void sparkbot::blue() //This function turns on the blue, and turns off the red and green
 {
-  digitalWrite(blueled, HIGH);
   digitalWrite(redled, LOW);
+  redledOn = false;
+  digitalWrite(blueled, HIGH);
+  blueledOn = true;
   digitalWrite(greenled, LOW);
+  greenledOn = false;
 }
 
 void sparkbot::green() //This function turns on the green, and turns off the red and blue
 {
-    digitalWrite(greenled, HIGH);
-    digitalWrite(redled, LOW);
-    digitalWrite(blueled, LOW);
+  digitalWrite(redled, LOW);
+  redledOn = false;
+  digitalWrite(blueled, LOW);
+  blueledOn = false;
+  digitalWrite(greenled, HIGH);
+  greenledOn = true;
+  choice = 0;
 }
 
 void sparkbot::syncLights()
 {
+  const char *color = "";
   if (redledOn == true)
   {
-    Spark.publish("redLed");
-    return;
+    color = "red";
   }
 
   if (blueledOn == true)
   {
-    Spark.publish("blueLed");
-    return;
+    color = "blue"
   }
 
   if (greenledOn == true)
   {
-    Spark.publish("greenLed");
-    return;
+    color = "green";
   }
+
+  Spark.publish("RGB", color);
 }
 
 void sparkbot::syncServos()
@@ -213,28 +223,22 @@ void sparkbot::moveLeftSlave(const char *event, const char *data)
   return;
 }
 
-void sparkbot::redLedSlave(const char *event, const char *data)
+void sparkbot::RGBSlave(const char *event, const char *data)
 {
-  digitalWrite(redled, HIGH);
-  digitalWrite(blueled, LOW);
-  digitalWrite(greenled, LOW);
-  return;
-}
+  if (data == "red")
+  {
+    red();
+  }
 
-void sparkbot::blueLedSlave(const char *event, const char *data)
-{
-  digitalWrite(redled, LOW);
-  digitalWrite(blueled, HIGH);
-  digitalWrite(greenled, LOW);
-  return;
-}
+  if (data == "blue")
+  {
+    blue();
+  }
 
-void sparkbot::greenLedSlave(const char *event, const char *data)
-{
-  digitalWrite(redled, LOW);
-  digitalWrite(blueled, LOW);
-  digitalWrite(greenled, HIGH);
-  return;
+  if (data == "green")
+  {
+    green();
+  }
 }
 
 float sparkbot::getTempC()
@@ -245,12 +249,11 @@ float sparkbot::getTempC()
   return tempC;
 }
 
-/*void sparkbot::initiateSlave()
+void sparkbot::initiateSlave()
 {
-Spark.subscribe("moveNeck", moveNeckSlave);
-Spark.subscribe("moveRight", moveRightSlave);
-Spark.subscribe("moveLeft", moveLeftSlave);
-Spark.subscribe("redLed", redLedSlave);
-Spark.subscribe("blueLed", blueLedSlave);
-Spark.subscribe("greenLed", greenLedSlave);
-}*/
+Spark.subscribe("moveNeck", moveNeckSlave, MY_DEVICES);
+Spark.subscribe("moveRight", moveRightSlave, MY_DEVICES);
+Spark.subscribe("moveLeft", moveLeftSlave, MY_DEVICES);
+Spark.subscribe("RGB", RGBSlave), MY_DEVICES);
+
+}
