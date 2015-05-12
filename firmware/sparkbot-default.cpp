@@ -239,7 +239,7 @@ void sparkbot::greenLedSlave(const char *event, const char *data)
 
 float sparkbot::getTempC()
 {
-  float temp;
+  float tempC;
   tempC = analogRead(temperature);
   tempC = tempC * 0.48828125;
   return tempC;
@@ -247,10 +247,10 @@ float sparkbot::getTempC()
 
 void sparkbot::startSlave()
 {
-Spark.subscribe("moveNeck", self.moveNeckSlave);
-Spark.subscribe("moveRight", self.moveRightSlave);
-Spark.subscribe("moveLeft", self.moveLeftSlave);
-Spark.subscribe("redLed", self.redLedSlave);
-Spark.subscribe("blueLed", self.blueLedSlave);
-Spark.subscribe("greenLed", self.greenLedSlave);
+Spark.subscribe("moveNeck", moveNeckSlave);
+Spark.subscribe("moveRight", moveRightSlave);
+Spark.subscribe("moveLeft", moveLeftSlave);
+Spark.subscribe("redLed", redLedSlave);
+Spark.subscribe("blueLed", blueLedSlave);
+Spark.subscribe("greenLed", greenLedSlave);
 }
