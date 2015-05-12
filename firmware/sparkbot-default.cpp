@@ -14,7 +14,7 @@ sparkbot::sparkbot()
 
   // Buttons
   rightbutton = D7;
-  leftbutton = A5;
+  leftbutton = D3;
 
   // LED Pins
   redled = D4;
@@ -27,7 +27,7 @@ sparkbot::sparkbot()
   greenledOn = false;
 
   // Sensor Pins
-  temperature = D3;
+  temperature = A5;
   microphone = A1;
 
   // Other Pins
