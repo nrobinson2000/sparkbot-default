@@ -237,6 +237,16 @@ void sparkbot::greenLedSlave(const char *event, const char *data)
   return;
 }
 
+int getTempC()
+{
+  int refReading = analogRead(BANDGAPREF);
+  float supplyvoltage = (1.05 * 1024) / refReading;
+  int reading = analogRead(temperature);
+  float voltage = reading * supplyvoltage / 1024;
+  float temperatureC = (voltage - 0.5) * 100;
+  return temperatureC;
+}
+
 /*void sparkbot::startSlave()
 {
 Spark.subscribe("moveNeck", sparkbot::moveNeckSlave);
