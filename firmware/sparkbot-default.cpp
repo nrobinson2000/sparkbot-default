@@ -245,7 +245,7 @@ float sparkbot::getTempC()
   return tempC;
 }
 
-void sparkbot::startSlave()
+void sparkbot::initiateSlave()
 {
 Spark.subscribe("moveNeck", moveNeckSlave);
 Spark.subscribe("moveRight", moveRightSlave);
