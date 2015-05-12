@@ -150,7 +150,7 @@ void sparkbot::syncLights()
 
   if (blueledOn == true)
   {
-    color = "blue"
+    color = "blue";
   }
 
   if (greenledOn == true)
@@ -225,17 +225,17 @@ void sparkbot::moveLeftSlave(const char *event, const char *data)
 
 void sparkbot::RGBSlave(const char *event, const char *data)
 {
-  if (data == "red")
+  if (strcmp(data) == "red")
   {
     red();
   }
 
-  if (data == "blue")
+  if (strcmp(data) == "blue")
   {
     blue();
   }
 
-  if (data == "green")
+  if (strcmp(data) == "green")
   {
     green();
   }
