@@ -205,7 +205,7 @@ void sparkbot::stopBuzzer()
 }
 
 
-void sparkbot::moveNeckSlave(const char *event, const char *data)
+static void sparkbot::moveNeckSlave(const char *event, const char *data)
 {
   neckservo.write(atoi(data));
   return;
@@ -256,9 +256,9 @@ void derp( const char * c, const char * d)
 
 void sparkbot::initiateSlave()
 {
-Spark.subscribe("moveNeck", (EventHandler)moveNeckSlave, MY_DEVICES);
-Spark.subscribe("moveRight", (EventHandler)moveRightSlave, MY_DEVICES);
-Spark.subscribe("moveLeft", (EventHandler)moveLeftSlave, MY_DEVICES);
-Spark.subscribe("RGB", (EventHandler)RGBSlave, MY_DEVICES);
+Spark.subscribe("moveNeck", moveNeckSlave, MY_DEVICES);
+Spark.subscribe("moveRight", moveRightSlave, MY_DEVICES);
+Spark.subscribe("moveLeft", moveLeftSlave, MY_DEVICES);
+Spark.subscribe("RGB", (EventHandler *)RGBSlave, MY_DEVICES);
 
 }
