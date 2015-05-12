@@ -247,12 +247,12 @@ int sparkbot::getTempC()
   return temperatureC;
 }
 
-/*void sparkbot::startSlave()
+void sparkbot::startSlave()
 {
-Spark.subscribe("moveNeck", sparkbot::moveNeckSlave);
-Spark.subscribe("moveRight", sparkbot::moveRightSlave);
-Spark.subscribe("moveLeft", sparkbot::moveLeftSlave);
-Spark.subscribe("redLed", sparkbot::redLedSlave);
-Spark.subscribe("blueLed", sparkbot::blueLedSlave);
-Spark.subscribe("greenLed", sparkbot::greenLedSlave);
-}*/
+Spark.subscribe("moveNeck", self.moveNeckSlave);
+Spark.subscribe("moveRight", self.moveRightSlave);
+Spark.subscribe("moveLeft", self.moveLeftSlave);
+Spark.subscribe("redLed", self.redLedSlave);
+Spark.subscribe("blueLed", self.blueLedSlave);
+Spark.subscribe("greenLed", self.greenLedSlave);
+}
