@@ -26,7 +26,7 @@ sparkbot::sparkbot()
   blueledOn = false;
   greenledOn = false;
 
-  // Sensor Pins
+  // Analog Sensor Pins
   temperature = A5;
   microphone = A1;
 
@@ -237,7 +237,7 @@ void sparkbot::greenLedSlave(const char *event, const char *data)
   return;
 }
 
-int getTempC()
+int sparkbot::getTempC()
 {
   int refReading = analogRead(BANDGAPREF);
   float supplyvoltage = (1.05 * 1024) / refReading;
