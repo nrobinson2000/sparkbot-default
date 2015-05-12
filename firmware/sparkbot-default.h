@@ -60,7 +60,7 @@ public:
   void redLedSlave(const char *event, const char *data);
   void blueLedSlave(const char *event, const char *data);
   void greenLedSlave(const char *event, const char *data);
-  void startSlave();
+  void initiateSlave();
   float getTempC();
 
 };
