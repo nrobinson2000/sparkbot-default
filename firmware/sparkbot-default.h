@@ -61,7 +61,7 @@ public:
   void blueLedSlave(const char *event, const char *data);
   void greenLedSlave(const char *event, const char *data);
   void startSlave();
-  int getTempC();
+  float getTempC();
 
 };
 #endif

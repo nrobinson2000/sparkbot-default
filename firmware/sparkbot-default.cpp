@@ -237,14 +237,12 @@ void sparkbot::greenLedSlave(const char *event, const char *data)
   return;
 }
 
-int sparkbot::getTempC()
+float sparkbot::getTempC()
 {
-  int refReading = analogRead(BANDGAPREF);
-  float supplyvoltage = (1.05 * 1024) / refReading;
-  int reading = analogRead(temperature);
-  float voltage = reading * supplyvoltage / 1024;
-  float temperatureC = (voltage - 0.5) * 100;
-  return temperatureC;
+  float temp;
+  tempC = analogRead(temperature);
+  tempC = tempC * 0.48828125;
+  return tempC;
 }
 
 void sparkbot::startSlave()
