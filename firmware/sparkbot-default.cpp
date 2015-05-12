@@ -254,6 +254,6 @@ void sparkbot::initiateSlave()
 Spark.subscribe("moveNeck", moveNeckSlave, MY_DEVICES);
 Spark.subscribe("moveRight", moveRightSlave, MY_DEVICES);
 Spark.subscribe("moveLeft", moveLeftSlave, MY_DEVICES);
-Spark.subscribe("RGB", RGBSlave), MY_DEVICES);
+Spark.subscribe("RGB", RGBSlave, MY_DEVICES);
 
 }
