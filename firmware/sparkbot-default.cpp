@@ -225,17 +225,17 @@ void sparkbot::moveLeftSlave(const char *event, const char *data)
 
 void sparkbot::RGBSlave(const char *event, const char *data)
 {
-  if (strcmp(data) == "red")
+  if (strcmp(data, "red") == 0)
   {
     red();
   }
 
-  if (strcmp(data) == "blue")
+  if (strcmp(data, "blue") == 0)
   {
     blue();
   }
 
-  if (strcmp(data) == "green")
+  if (strcmp(data, "green") == 0)
   {
     green();
   }
