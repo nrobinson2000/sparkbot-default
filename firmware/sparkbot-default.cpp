@@ -251,9 +251,9 @@ float sparkbot::getTempC()
 
 void sparkbot::initiateSlave()
 {
-Spark.subscribe("moveNeck", String(moveNeckSlave), MY_DEVICES);
-Spark.subscribe("moveRight", String(moveRightSlave), MY_DEVICES);
-Spark.subscribe("moveLeft", String(moveLeftSlave), MY_DEVICES);
-Spark.subscribe("RGB", String(RGBSlave), MY_DEVICES);
+Spark.subscribe("moveNeck", moveNeckSlave, MY_DEVICES);
+Spark.subscribe("moveRight", moveRightSlave, MY_DEVICES);
+Spark.subscribe("moveLeft", moveLeftSlave, MY_DEVICES);
+Spark.subscribe("RGB", RGBSlave, MY_DEVICES);
 
 }
