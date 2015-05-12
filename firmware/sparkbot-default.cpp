@@ -256,9 +256,9 @@ void derp( const char * c, const char * d)
 
 void sparkbot::initiateSlave()
 {
-Spark.subscribe("moveNeck", derp, MY_DEVICES);
-Spark.subscribe("moveRight", moveRightSlave, MY_DEVICES);
-Spark.subscribe("moveLeft", moveLeftSlave, MY_DEVICES);
-Spark.subscribe("RGB", RGBSlave, MY_DEVICES);
+Spark.subscribe("moveNeck", EventHandler(moveNeckSlave), MY_DEVICES);
+Spark.subscribe("moveRight", EventHandler(moveRightSlave), MY_DEVICES);
+Spark.subscribe("moveLeft", EventHandler(moveLeftSlave), MY_DEVICES);
+Spark.subscribe("RGB", EventHandler(RGBSlave), MY_DEVICES);
 
 }
