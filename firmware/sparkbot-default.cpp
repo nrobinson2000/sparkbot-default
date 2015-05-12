@@ -249,9 +249,14 @@ float sparkbot::getTempC()
   return tempC;
 }
 
+void derp( const char * c, const char * d)
+{
+
+}
+
 void sparkbot::initiateSlave()
 {
-Spark.subscribe("moveNeck", moveNeckSlave, MY_DEVICES);
+Spark.subscribe("moveNeck", derp, MY_DEVICES);
 Spark.subscribe("moveRight", moveRightSlave, MY_DEVICES);
 Spark.subscribe("moveLeft", moveLeftSlave, MY_DEVICES);
 Spark.subscribe("RGB", RGBSlave, MY_DEVICES);
