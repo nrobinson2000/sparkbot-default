@@ -1,6 +1,5 @@
 #ifndef sparkbot_default_h
 #define sparkbot_default_h
-#include "application.h"
 
 class sparkbot
 {

@@ -43,7 +43,6 @@ sparkbot::sparkbot()
 
 }
 
-
 void sparkbot::startup()
 {
   rightservo.attach(D0); //Here we attach the three servos
@@ -281,7 +280,6 @@ float sparkbot::getTempC()
   tempC = tempC * 0.48828125;
   return tempC;
 }
-
 
 void sparkbot::initiateSlave()
 {
