@@ -72,9 +72,9 @@ void sparkbot::startup()
   Spark.variable("rightArm", &rightArmAngle, INT);
   Spark.variable("leftArm", &leftArmAngle, INT);
 
-  Spark.function("moveNeck", (int)&(String sparkbot::moveNeckCloud));
-  Spark.function("moveRight", (int)&(String sparkbot::moveRightCloud));
-  Spark.function("moveLeft", (int)&String sparkbot::moveLeftCloud));
+  Spark.function("moveNeck", (String sparkbot::moveNeckCloud));
+  Spark.function("moveRight", (String sparkbot::moveRightCloud));
+  Spark.function("moveLeft", (String sparkbot::moveLeftCloud));
 }
 
 
