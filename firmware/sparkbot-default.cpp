@@ -218,19 +218,19 @@ void sparkbot::stopBuzzer()
   analogWrite(buzzer, 0);
 }
 
-int sparkbot::moveNeckCloud(String data)
+int sparkbot::moveNeckCloud(const char *data)
 {
   neckservo.write(atoi(data));
   return;
 }
 
-int sparkbot::moveRightCloud(String data)
+int sparkbot::moveRightCloud(const char *data)
 {
   rightservo.write(atoi(data));
   return;
 }
 
-int sparkbot::moveLeftCloud(String data)
+int sparkbot::moveLeftCloud(const char *data)
 {
   leftservo.write(atoi(data));
   return;
