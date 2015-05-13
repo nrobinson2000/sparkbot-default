@@ -252,10 +252,10 @@ float sparkbot::getTempC()
 
 void sparkbot::initiateSlave()
 {
-Spark.subscribe("moveNeck", (EventHandler *)&sparkbot::moveNeckSlave, MY_DEVICES);
-Spark.subscribe("moveRight", (EventHandler *)&sparkbot::moveRightSlave, MY_DEVICES);
-Spark.subscribe("moveLeft", (EventHandler *)&sparkbot::moveLeftSlave, MY_DEVICES);
-Spark.subscribe("RGB", (EventHandler *)&sparkbot::RGBSlave, MY_DEVICES);
+Spark.subscribe("moveNeck", (EventHandler *)&(sparkbot::moveNeckSlave), MY_DEVICES);
+Spark.subscribe("moveRight", (EventHandler *)&(sparkbot::moveRightSlave), MY_DEVICES);
+Spark.subscribe("moveLeft", (EventHandler *)&(sparkbot::moveLeftSlave), MY_DEVICES);
+Spark.subscribe("RGB", (EventHandler *)&(sparkbot::RGBSlave), MY_DEVICES);
 
 }
 
@@ -267,10 +267,10 @@ syncServos();
 
 void sparkbot::startLeftButton()
 {
-attachInterrupt(leftbutton, &sparkbot::switchLights, RISING);
+attachInterrupt(leftbutton, (VoidFuncPtr)&(sparkbot::switchLights), RISING);
 }
 
 void sparkbot::startRightButton()
 {
-attachInterrupt(rightbutton, &sparkbot::sync, RISING);
+attachInterrupt(rightbutton, (VoidFuncPtr)&(sparkbot::sync), RISING);
 }
