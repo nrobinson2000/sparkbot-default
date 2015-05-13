@@ -72,9 +72,9 @@ void sparkbot::startup()
   Spark.variable("rightArm", &rightArmAngle, INT);
   Spark.variable("leftArm", &leftArmAngle, INT);
 
-  Spark.function("moveNeck", (voidFuncPtr)&sparkbot::moveNeck);
-  Spark.function("moveRight", (voidFuncPtr)&sparkbot::moveRight);
-  Spark.function("moveLeft", (voidFuncPtr)&sparkbot::moveLeft)
+  Spark.function("moveNeck", (voidFuncPtr)&sparkbot::moveNeckCloud);
+  Spark.function("moveRight", (voidFuncPtr)&sparkbot::moveRightCloud);
+  Spark.function("moveLeft", (voidFuncPtr)&sparkbot::moveLeftCloud)
 }
 
 
@@ -217,6 +217,25 @@ void sparkbot::stopBuzzer()
 {
   analogWrite(buzzer, 0);
 }
+
+void sparkbot::moveNeckCloud(const char *data)
+{
+  neckservo.write(atoi(data));
+  return;
+}
+
+void sparkbot::moveRightCloud(const char *data)
+{
+  rightservo.write(atoi(data));
+  return;
+}
+
+void sparkbot::moveLeftCloud(const char *data)
+{
+  leftservo.write(atoi(data));
+  return;
+}
+
 
 
 void sparkbot::moveNeckSlave(const char *event, const char *data)
