@@ -67,6 +67,10 @@ void sparkbot::startup()
   rightArmAngle = rightservo.read();
   leftservo.write(90);
   leftArmAngle = leftservo.read();
+
+  Spark.variable("neck", &neckAngle, INT);
+  Spark.variable("rightArm", &rightArmAngle, INT);
+  Spark.variable("leftArm", &leftArmAngle, INT)
 }
 
 
@@ -165,16 +169,19 @@ void sparkbot::syncServos()
 {
   if (neckAngle != neckservo.read())
   {
+    neckAngle = neckservo.read();
     Spark.publish("moveNeck", String(neckservo.read()));
   }
 
   if (rightArmAngle != rightservo.read())
   {
+    rightArmAngle = rightservo.read();
     Spark.publish("moveRight", String(rightservo.read()));
   }
 
   if (leftArmAngle != leftservo.read())
   {
+    leftArmAngle = leftservo.read();
     Spark.publish("moveLeft", String(leftservo.read()));
   }
 }
@@ -182,16 +189,19 @@ void sparkbot::syncServos()
 void sparkbot::moveNeck(int value)
 {
   neckservo.write(value);
+  neckAngle = neckservo.read();
 }
 
 void sparkbot::moveRight(int value)
 {
   rightservo.write(value);
+  rightArmAngle = rightservo.read();
 }
 
 void sparkbot::moveLeft(int value)
 {
   leftservo.write(value);
+  leftArmAngle = leftservo.read();
 }
 
 void sparkbot::playBuzzer(int value)
