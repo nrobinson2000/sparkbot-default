@@ -221,19 +221,19 @@ void sparkbot::stopBuzzer()
 int sparkbot::moveNeckCloud(const char *data)
 {
   neckservo.write(atoi(data));
-  return;
+  return 1;
 }
 
 int sparkbot::moveRightCloud(const char *data)
 {
   rightservo.write(atoi(data));
-  return;
+  return 1;
 }
 
 int sparkbot::moveLeftCloud(const char *data)
 {
   leftservo.write(atoi(data));
-  return;
+  return 1;
 }
 
 
