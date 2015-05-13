@@ -300,10 +300,10 @@ syncServos();
 
 void sparkbot::startLeftButton()
 {
-attachInterrupt(leftbutton, (void)&sparkbot::switchLights, RISING);
+attachInterrupt(leftbutton, (voidFuncPtr)&sparkbot::switchLights, RISING);
 }
 
 void sparkbot::startRightButton()
 {
-attachInterrupt(rightbutton, (void)&sparkbot::sync, RISING);
+attachInterrupt(rightbutton, (voidFuncPtr)&sparkbot::sync, RISING);
 }
