@@ -259,18 +259,18 @@ Spark.subscribe("RGB", (EventHandler)&sparkbot::RGBSlave, MY_DEVICES);
 
 }
 
-void sync()
+void sparkbot::sync()
 {
 syncLights();
 syncServos();
 }
 
-void startLeftButton()
+void sparkbot::startLeftButton()
 {
 attachInterrupt(leftbutton, (EventHandler)&sparkbot::switchLights, RISING);
 }
 
-void startRightButton()
+void sparkbot::startRightButton()
 {
 attachInterrupt(rightbutton, (EventHandler)&sparkbot::sync, RISING);
 }
