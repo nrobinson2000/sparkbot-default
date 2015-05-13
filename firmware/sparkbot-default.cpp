@@ -70,7 +70,7 @@ void sparkbot::startup()
 
   Spark.variable("neck", &neckAngle, INT);
   Spark.variable("rightArm", &rightArmAngle, INT);
-  Spark.variable("leftArm", &leftArmAngle, INT)
+  Spark.variable("leftArm", &leftArmAngle, INT);
 }
 
 
