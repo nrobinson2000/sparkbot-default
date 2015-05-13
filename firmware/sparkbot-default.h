@@ -60,6 +60,9 @@ public:
   void RGBSlave(const char *event, const char *data);
   void initiateSlave();
   float getTempC();
+void sync();
+void startLeftButton();
+void startRightButton();
 
 };
 #endif
