@@ -258,3 +258,19 @@ Spark.subscribe("moveLeft", (EventHandler)&sparkbot::moveLeftSlave, MY_DEVICES);
 Spark.subscribe("RGB", (EventHandler)&sparkbot::RGBSlave, MY_DEVICES);
 
 }
+
+void sync()
+{
+syncLights();
+syncServos();
+}
+
+void startLeftButton()
+{
+attachInterrupt(leftbutton, (EventHandler)&sparkbot::switchLights, RISING);
+}
+
+void startRightButton()
+{
+attachInterrupt(rightbutton, (EventHandler)&sparkbot::sync, RISING);
+}
