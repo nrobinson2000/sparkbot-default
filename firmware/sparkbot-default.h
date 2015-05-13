@@ -60,9 +60,13 @@ public:
   void RGBSlave(const char *event, const char *data);
   void initiateSlave();
   float getTempC();
-void sync();
-void startLeftButton();
-void startRightButton();
+  void sync();
+  void startLeftButton();
+  void startRightButton();
+
+  void moveNeckCloud(const char *data);
+  void moveRightCloud(const char *data);
+  void moveLeftCloud(const char *data);
 
 };
 #endif

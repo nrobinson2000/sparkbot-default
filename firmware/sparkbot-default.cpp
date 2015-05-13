@@ -74,7 +74,7 @@ void sparkbot::startup()
 
   Spark.function("moveNeck", (voidFuncPtr)&sparkbot::moveNeckCloud);
   Spark.function("moveRight", (voidFuncPtr)&sparkbot::moveRightCloud);
-  Spark.function("moveLeft", (voidFuncPtr)&sparkbot::moveLeftCloud)
+  Spark.function("moveLeft", (voidFuncPtr)&sparkbot::moveLeftCloud);
 }
 
 
