@@ -64,9 +64,9 @@ public:
   void startLeftButton();
   void startRightButton();
 
-  int moveNeckCloud(String data);
-  int moveRightCloud(String data);
-  int moveLeftCloud(String data);
+  int moveNeckCloud(const char *data);
+  int moveRightCloud(const char *data);
+  int moveLeftCloud(const char *data);
 
 };
 #endif
