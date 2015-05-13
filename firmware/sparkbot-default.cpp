@@ -71,6 +71,10 @@ void sparkbot::startup()
   Spark.variable("neck", &neckAngle, INT);
   Spark.variable("rightArm", &rightArmAngle, INT);
   Spark.variable("leftArm", &leftArmAngle, INT);
+
+  Spark.function("moveNeck", (voidFuncPtr)&sparkbot::moveNeck);
+  Spark.function("moveRight", (voidFuncPtr)&sparkbot::moveRight);
+  Spark.function("moveLeft", (voidFuncPtr)&sparkbot::moveLeft)
 }
 
 
