@@ -28,15 +28,19 @@ sparkbot::sparkbot()
 
   // Analog Sensor Pins
   temperature = A5;
-  microphone = A1;
+  microphone = A4;
 
   // Other Pins
-  buzzer = A0;
+  buzzer = A3;
 
   // I/O pins
-  io1 = A2;
-  io2 = A3;
-  io3 = A4;
+  io1 = A9;
+  io2 = A8;
+  io3 = A7;
+
+  io4 = A2;
+  io5 = A1;
+  io6 = A0;
 
   choice = 0; // Used for random tests
 
