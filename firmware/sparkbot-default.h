@@ -33,6 +33,11 @@ public:
   int io1;
   int io2;
   int io3;
+  int io4;
+
+  int rightServoPin;
+  int leftServoPin;
+  int neckServoPin;
 
   int choice;
 

@@ -7,40 +7,42 @@ Servo neckservo;
 
 sparkbot::sparkbot()
 {
-  // Servo angles
+  // 3 Servo angles
   neckAngle = 0;
   rightArmAngle = 0;
   leftArmAngle = 0;
 
-  // Buttons
+  // 2 Buttons
   rightbutton = D7;
   leftbutton = D3;
 
-  // LED Pins
+  // 3 LED Pins
   redled = D4;
   blueled = D5;
   greenled = D6;
 
-  // LED Booleans
+  // 3 LED Booleans
   redledOn = false;
   blueledOn = false;
   greenledOn = false;
 
-  // Analog Sensor Pins
+  // 2 Analog Sensor Pins
   temperature = A5;
   microphone = A4;
 
-  // Other Pins
+  // 1 Other Pins
   buzzer = A3;
 
-  // I/O pins
-  io1 = A9;
-  io2 = A8;
-  io3 = A7;
+  // 4 I/O pins
+  io1 = A7;
+  io2 = A2;
+  io3 = A1;
+  io4 = A0;
 
-  io4 = A2;
-  io5 = A1;
-  io6 = A0;
+  // 3 Servo pins
+  rightServoPin = D0;
+  leftServoPin = D1;
+  neckServoPin = D2;
 
   choice = 0; // Used for random tests
 
