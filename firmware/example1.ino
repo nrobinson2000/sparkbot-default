@@ -3,6 +3,8 @@
 SparkBot: Tinker
 This file uses the SparkBot library and the Tinker framework to allow SparkBot to
 be used with Tinker in the iPhone app.
+Can not compile because Core is selcected.
+Waiting for my photons to be delivered.
 */
 
 sparkbot sb;

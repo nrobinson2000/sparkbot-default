@@ -34,6 +34,8 @@ public:
   int io2;
   int io3;
   int io4;
+  int io5;
+  int io6;
 
   int rightServoPin;
   int leftServoPin;

@@ -34,10 +34,12 @@ sparkbot::sparkbot()
   buzzer = A3;
 
   // 4 I/O pins
-  io1 = A7;
-  io2 = A2;
-  io3 = A1;
-  io4 = A0;
+  io1 = A9;
+  io2 = A8;
+  io3 = A7;
+  io4 = A2;
+  io5 = A1;
+  io6 = A0;
 
   // 3 Servo pins
   rightServoPin = D0;
