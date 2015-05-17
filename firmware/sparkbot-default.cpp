@@ -28,10 +28,10 @@ sparkbot::sparkbot()
 
   // 2 Analog Sensor Pins
   temperature = A5;
-  microphone = A4;
+  microphone = A3;
 
   // 1 Other Pins
-  buzzer = A3;
+  buzzer = A4;
 
   // 4 I/O pins
   io1 = A9;
