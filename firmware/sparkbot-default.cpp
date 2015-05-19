@@ -17,9 +17,9 @@ sparkbot::sparkbot()
   leftbutton = D3;
 
   // 3 LED Pins
-  redled = D4;
-  blueled = D5;
-  greenled = D6;
+  redled = D0;
+  blueled = D1;
+  greenled = D2;
 
   // 3 LED Booleans
   redledOn = false;
@@ -42,9 +42,9 @@ sparkbot::sparkbot()
   io6 = A0;
 
   // 3 Servo pins
-  rightServoPin = D0;
-  leftServoPin = D1;
-  neckServoPin = D2;
+  rightServoPin = D4;
+  leftServoPin = D5;
+  neckServoPin = D6;
 
   choice = 0; // Used for random tests
 
@@ -53,9 +53,9 @@ sparkbot::sparkbot()
 
 void sparkbot::startup()
 {
-  rightservo.attach(D0); //Here we attach the three servos
-  leftservo.attach(D1);
-  neckservo.attach(D2);
+  rightservo.attach(rightServoPin); //Here we attach the three servos
+  leftservo.attach(leftServoPin);
+  neckservo.attach(neckServoPin);
 
   pinMode(rightbutton, INPUT);  //We define the two button pins as inputs.
   pinMode(leftbutton, INPUT);
