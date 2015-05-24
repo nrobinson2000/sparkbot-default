@@ -73,5 +73,7 @@ public:
   int moveRightCloud(const char *data);
   int moveLeftCloud(const char *data);
 
+  int moodlights(int red, int blue, int green);
+
 };
 #endif

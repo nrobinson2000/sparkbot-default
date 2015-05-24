@@ -428,3 +428,11 @@ int sparkbotsOnline()
 {
   Spark.publish("online?");
 }
+
+int moodlights(int red, int blue, int green)
+{
+  analogWrite(D0, red);
+  analogWrite(D1, blue);
+  analogWrite(D2, green);
+  return 1;
+}
