@@ -60,9 +60,8 @@ public:
   void playBuzzer(int value);
   void stopBuzzer();
 
-  void moveNeckSlave(const char *event, const char *data);
-  void moveRightSlave(const char *event, const char *data);
-  void moveLeftSlave(const char *event, const char *data);
+  void syncServosSlave(const char *event, const char *data);
+
   void RGBSlave(const char *event, const char *data);
   void initiateSlave();
   float getTempC();

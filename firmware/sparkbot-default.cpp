@@ -34,8 +34,9 @@ sparkbot::sparkbot()
   buzzer = A4;
 
   // 4 I/O pins
-  io1 = A9;
+  /*io1 = A9;
   io2 = A8;
+  */
   io3 = A7;
   io4 = A2;
   io5 = A1;
@@ -178,23 +179,109 @@ void sparkbot::syncLights()
 
 void sparkbot::syncServos()
 {
-  if (neckAngle != neckservo.read())
+  String message = String("");
+  String neckdata = String("");
+  String rightdata = String("");
+  String leftdata = String("");
+
+  int neck = neckservo.read();
+  int right = rightservo.read();
+  int left = leftservo.read();
+
+  bool neckchanged = false;
+  bool rightchanged = false;
+  bool leftchanged = false;
+
+  if (neckAngle != neck)
   {
-    neckAngle = neckservo.read();
-    Spark.publish("moveNeck", String(neckservo.read()));
+    neckAngle = neck;
+    neckchanged = true;
+    if (neck < 100 && neck > 9)
+    {
+      neckdata = String("0" + String(neck));
+    }
+    if (neck < 10)
+    {
+      neckdata = String("00" +String(neck));
+    }
+    else
+    {
+      neckdata = String(neck);
+    }
   }
 
-  if (rightArmAngle != rightservo.read())
+  if (rightArmAngle != right)
   {
-    rightArmAngle = rightservo.read();
-    Spark.publish("moveRight", String(rightservo.read()));
+    rightArmAngle = right;
+    rightchanged = true;
+
+    if (right < 100 && right > 9)
+    {
+      rightdata = String("0" + String(right));
+    }
+    if (right < 10)
+    {
+      rightdata = String("00" +String(right));
+    }
+    else
+    {
+      rightdata = String(right);
+    }
   }
 
-  if (leftArmAngle != leftservo.read())
+  if (leftArmAngle != left)
   {
-    leftArmAngle = leftservo.read();
-    Spark.publish("moveLeft", String(leftservo.read()));
+    leftArmAngle = left;
+    leftchanged = true;
+
+    if (left < 100 && left > 9)
+    {
+      leftdata = String("0" + String(left));
+    }
+    if (left < 10)
+    {
+      leftdata = String("00" +String(left));
+    }
+    else
+    {
+      leftdata = String(left);
+    }
   }
+
+switch (neckchanged)
+{
+  case true:
+  message += neckdata;
+  break;
+
+  case false:
+  message += String("200");
+}
+
+switch (rightchanged)
+{
+  case true:
+  message += rightdata;
+  break;
+
+  case false:
+  message += String("200");
+  break;
+}
+
+switch (leftchanged)
+{
+  case true:
+  message += leftdata;
+  break;
+
+  case false:
+  message += String("200");
+}
+
+Spark.publish("syncServos", message);
+
+
 }
 
 void sparkbot::moveNeck(int value)
@@ -227,40 +314,65 @@ void sparkbot::stopBuzzer()
 
 int sparkbot::moveNeckCloud(const char *data)
 {
-  neckservo.write(atoi(data));
+  sparkbot::moveNeck(atoi(data));
   return 1;
 }
 
 int sparkbot::moveRightCloud(const char *data)
 {
-  rightservo.write(atoi(data));
+  sparkbot::moveRight(atoi(data));
   return 1;
 }
 
 int sparkbot::moveLeftCloud(const char *data)
 {
-  leftservo.write(atoi(data));
+  sparkbot::moveLeft(atoi(data));
   return 1;
 }
 
 
 
-void sparkbot::moveNeckSlave(const char *event, const char *data)
+void sparkbot::syncServosSlave(const char *event, const char *data)
 {
-  neckservo.write(atoi(data));
-  return;
-}
+  String message = String(data);
+  String neckresult = String(message.charAt(0) + message.charAt(1) + message.charAt(2));
+  String rightresult = String(message.charAt(3) + message.charAt(4) + message.charAt(5));
+  String leftresult = String(message.charAt(6) + message.charAt(7) + message.charAt(8));
 
-void sparkbot::moveRightSlave(const char *event, const char *data)
-{
-  rightservo.write(atoi(data));
-  return;
-}
+  bool moveNeck = false;
+  bool moveRight = false;
+  bool moveLeft = false;
 
-void sparkbot::moveLeftSlave(const char *event, const char *data)
-{
-  leftservo.write(atoi(data));
-  return;
+  if (neckresult.toInt() >= 0 && neckresult.toInt() <= 180)
+  {
+    moveNeck = true;
+  }
+
+  if (rightresult.toInt() >= 0 && rightresult.toInt() <= 180)
+  {
+    moveRight = true;
+  }
+
+  if (leftresult.toInt() >= 0 && leftresult.toInt() <= 180)
+  {
+    moveLeft = true;
+  }
+
+
+  if (moveNeck == true)
+  {
+    sparkbot::moveNeck(neckresult.toInt());
+  }
+
+  if (moveRight == true)
+  {
+    sparkbot::moveRight(rightresult.toInt());
+  }
+
+  if (moveLeft == true)
+  {
+    sparkbot::moveLeft(leftresult.toInt());
+  }
 }
 
 void sparkbot::RGBSlave(const char *event, const char *data)
@@ -291,9 +403,7 @@ float sparkbot::getTempC()
 
 void sparkbot::initiateSlave()
 {
-Spark.subscribe("moveNeck", (EventHandler)&sparkbot::moveNeckSlave, MY_DEVICES);
-Spark.subscribe("moveRight", (EventHandler)&sparkbot::moveRightSlave, MY_DEVICES);
-Spark.subscribe("moveLeft", (EventHandler)&sparkbot::moveLeftSlave, MY_DEVICES);
+Spark.subscribe("syncServos", (EventHandler)&sparkbot::syncServosSlave, MY_DEVICES);
 Spark.subscribe("RGB", (EventHandler)&sparkbot::RGBSlave, MY_DEVICES);
 
 }
@@ -312,4 +422,9 @@ attachInterrupt(leftbutton, (voidFuncPtr)&sparkbot::switchLights, RISING);
 void sparkbot::startRightButton()
 {
 attachInterrupt(rightbutton, (voidFuncPtr)&sparkbot::sync, RISING);
+}
+
+int sparkbotsOnline()
+{
+  Spark.publish("online?");
 }
