@@ -47,9 +47,7 @@ sparkbot::sparkbot()
   leftServoPin = D5;
   neckServoPin = D6;
 
-  choice = 0; // Used for random tests
-
-
+  choice = 0; // Used for switching lights
 }
 
 void sparkbot::startup()
@@ -61,7 +59,7 @@ void sparkbot::startup()
   pinMode(rightbutton, INPUT);  //We define the two button pins as inputs.
   pinMode(leftbutton, INPUT);
 
-  pinMode(redled, OUTPUT);
+  pinMode(redled, OUTPUT); //LEDs
   pinMode(blueled, OUTPUT);
   pinMode(greenled, OUTPUT);
 
@@ -424,15 +422,16 @@ void sparkbot::startRightButton()
 attachInterrupt(rightbutton, (voidFuncPtr)&sparkbot::sync, RISING);
 }
 
-int sparkbotsOnline()
+int sparkbot::sparkbotsOnline()
 {
   Spark.publish("online?");
+  return 1;
 }
 
-int moodlights(int red, int blue, int green)
+int sparkbot::moodlights(int red, int blue, int green)
 {
-  analogWrite(D0, red);
-  analogWrite(D1, blue);
-  analogWrite(D2, green);
+  analogWrite(redled, red);
+  analogWrite(blueled, blue);
+  analogWrite(greenled, green);
   return 1;
 }
