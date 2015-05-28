@@ -26,6 +26,7 @@ public:
   bool greenledOn;
 
   int temperature;
+  int photoresistor;
   int microphone;
 
   int buzzer;

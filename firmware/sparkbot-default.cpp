@@ -27,7 +27,7 @@ sparkbot::sparkbot()
   greenledOn = false;
 
   // 2 Analog Sensor Pins
-  temperature = A5;
+  photoresistor = A5;
   microphone = A3;
 
   // 1 Other Pins
@@ -391,10 +391,10 @@ void sparkbot::RGBSlave(const char *event, const char *data)
   }
 }
 
-float sparkbot::getTempC()
+float sparkbot::getTempC(pin)
 {
   float tempC;
-  tempC = analogRead(temperature);
+  tempC = analogRead(pin);
   tempC = tempC * 0.48828125;
   return tempC;
 }
