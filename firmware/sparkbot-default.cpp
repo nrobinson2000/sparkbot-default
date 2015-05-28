@@ -391,7 +391,7 @@ void sparkbot::RGBSlave(const char *event, const char *data)
   }
 }
 
-float sparkbot::getTempC(pin)
+float sparkbot::getTempC(int pin)
 {
   float tempC;
   tempC = analogRead(pin);

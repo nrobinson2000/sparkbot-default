@@ -65,7 +65,7 @@ public:
 
   void RGBSlave(const char *event, const char *data);
   void initiateSlave();
-  float getTempC();
+  float getTempC(int pin);
   void sync();
   void startLeftButton();
   void startRightButton();
