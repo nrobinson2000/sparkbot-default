@@ -10,37 +10,36 @@ public:
 
   sparkbot();
 
+  #define RIGHTBUTTON D7
+  #define LEFTBUTTON D3
+
+  #define REDLED D0
+  #define BLUELED D1
+  #define GREENLED D2
+
+  #define PHOTORESISTOR A5
+  #define MICROPHONE A3
+  #define BUZZER A4
+
+  #define IO1 A9
+  #define IO2 A8
+  #define IO3 A7
+  #define IO4 A2
+  #define IO5 A1
+  #define IO6 A0
+
+
+  #define RIGHTSERVO D4
+  #define LEFTSERVO D5
+  #define NECKSERVO D6
+
   int neckAngle;
   int rightArmAngle;
   int leftArmAngle;
 
-  int rightbutton;
-  int leftbutton;
-
-  int redled;
-  int blueled;
-  int greenled;
-
   bool redledOn;
   bool blueledOn;
   bool greenledOn;
-
-  int temperature;
-  int photoresistor;
-  int microphone;
-
-  int buzzer;
-
-  int io1;
-  int io2;
-  int io3;
-  int io4;
-  int io5;
-  int io6;
-
-  int rightServoPin;
-  int leftServoPin;
-  int neckServoPin;
 
   int choice;
 

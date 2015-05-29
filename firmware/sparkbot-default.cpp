@@ -12,60 +12,30 @@ sparkbot::sparkbot()
   rightArmAngle = 0;
   leftArmAngle = 0;
 
-  // 2 Buttons
-  rightbutton = D7;
-  leftbutton = D3;
-
-  // 3 LED Pins
-  redled = D0;
-  blueled = D1;
-  greenled = D2;
-
   // 3 LED Booleans
   redledOn = false;
   blueledOn = false;
   greenledOn = false;
-
-  // 2 Analog Sensor Pins
-  photoresistor = A5;
-  microphone = A3;
-
-  // 1 Other Pins
-  buzzer = A4;
-
-  // 4 I/O pins
-  /*io1 = A9;
-  io2 = A8;
-  */
-  io3 = A7;
-  io4 = A2;
-  io5 = A1;
-  io6 = A0;
-
-  // 3 Servo pins
-  rightServoPin = D4;
-  leftServoPin = D5;
-  neckServoPin = D6;
 
   choice = 0; // Used for switching lights
 }
 
 void sparkbot::startup()
 {
-  rightservo.attach(rightServoPin); //Here we attach the three servos
-  leftservo.attach(leftServoPin);
-  neckservo.attach(neckServoPin);
+  rightservo.attach(RIGHTSERVO); //Here we attach the three servos
+  leftservo.attach(LEFTSERVO);
+  neckservo.attach(NECKSERVO);
 
-  pinMode(rightbutton, INPUT);  //We define the two button pins as inputs.
-  pinMode(leftbutton, INPUT);
+  pinMode(RIGHTBUTTON, INPUT);  //We define the two button pins as inputs.
+  pinMode(LEFTBUTTON, INPUT);
 
-  pinMode(redled, OUTPUT); //LEDs
-  pinMode(blueled, OUTPUT);
-  pinMode(greenled, OUTPUT);
+  pinMode(REDLED, OUTPUT); //LEDs
+  pinMode(BLUELED, OUTPUT);
+  pinMode(GREENLED, OUTPUT);
 
-  pinMode(buzzer, OUTPUT);
+  pinMode(BUZZER, OUTPUT);
 
-  pinMode(microphone, INPUT);
+  pinMode(MICROPHONE, INPUT);
 
   neckservo.write(90); // Reset servos and read the values.
   neckAngle = neckservo.read();
@@ -88,36 +58,21 @@ void sparkbot::switchLights()
 {
   if (choice == 0)
   {
-    digitalWrite(redled, HIGH);
-    redledOn = true;
-    digitalWrite(blueled, LOW);
-    blueledOn = false;
-    digitalWrite(greenled, LOW);
-    greenledOn = false;
+    red();
     choice = 1;
     return;
   }
 
   if (choice == 1)
   {
-    digitalWrite(redled, LOW);
-    redledOn = false;
-    digitalWrite(blueled, HIGH);
-    blueledOn = true;
-    digitalWrite(greenled, LOW);
-    greenledOn = false;
+    blue();
     choice = 2;
     return;
   }
 
   if (choice == 2)
   {
-    digitalWrite(redled, LOW);
-    redledOn = false;
-    digitalWrite(blueled, LOW);
-    blueledOn = false;
-    digitalWrite(greenled, HIGH);
-    greenledOn = true;
+    green();
     choice = 0;
     return;
   }
@@ -125,31 +80,31 @@ void sparkbot::switchLights()
 
 void sparkbot::red() //This function turns on the red, and turns off the blue and green
 {
-  digitalWrite(redled, HIGH);
+  digitalWrite(REDLED, HIGH);
   redledOn = true;
-  digitalWrite(blueled, LOW);
+  digitalWrite(BLUELED, LOW);
   blueledOn = false;
-  digitalWrite(greenled, LOW);
+  digitalWrite(GREENLED, LOW);
   greenledOn = false;
 }
 
 void sparkbot::blue() //This function turns on the blue, and turns off the red and green
 {
-  digitalWrite(redled, LOW);
+  digitalWrite(REDLED, LOW);
   redledOn = false;
-  digitalWrite(blueled, HIGH);
+  digitalWrite(BLUELED, HIGH);
   blueledOn = true;
-  digitalWrite(greenled, LOW);
+  digitalWrite(GREENLED, LOW);
   greenledOn = false;
 }
 
 void sparkbot::green() //This function turns on the green, and turns off the red and blue
 {
-  digitalWrite(redled, LOW);
+  digitalWrite(REDLED, LOW);
   redledOn = false;
-  digitalWrite(blueled, LOW);
+  digitalWrite(BLUELED, LOW);
   blueledOn = false;
-  digitalWrite(greenled, HIGH);
+  digitalWrite(GREENLED, HIGH);
   greenledOn = true;
   choice = 0;
 }
@@ -302,12 +257,12 @@ void sparkbot::moveLeft(int value)
 
 void sparkbot::playBuzzer(int value)
 {
-  analogWrite(buzzer, value);
+  analogWrite(BUZZER, value);
 }
 
 void sparkbot::stopBuzzer()
 {
-  analogWrite(buzzer, 0);
+  analogWrite(BUZZER, 0);
 }
 
 int sparkbot::moveNeckCloud(const char *data)
@@ -414,12 +369,12 @@ syncServos();
 
 void sparkbot::startLeftButton()
 {
-attachInterrupt(leftbutton, (voidFuncPtr)&sparkbot::switchLights, RISING);
+attachInterrupt(LEFTBUTTON, (voidFuncPtr)&sparkbot::switchLights, RISING);
 }
 
 void sparkbot::startRightButton()
 {
-attachInterrupt(rightbutton, (voidFuncPtr)&sparkbot::sync, RISING);
+attachInterrupt(RIGHTBUTTON, (voidFuncPtr)&sparkbot::sync, RISING);
 }
 
 int sparkbot::sparkbotsOnline()
@@ -430,8 +385,8 @@ int sparkbot::sparkbotsOnline()
 
 int sparkbot::moodlights(int red, int blue, int green)
 {
-  analogWrite(redled, red);
-  analogWrite(blueled, blue);
-  analogWrite(greenled, green);
+  analogWrite(REDLED, red);
+  analogWrite(BLUELED, blue);
+  analogWrite(GREENLED, green);
   return 1;
 }
