@@ -106,7 +106,6 @@ void sparkbot::green() //This function turns on the green, and turns off the red
   blueledOn = false;
   digitalWrite(GREENLED, HIGH);
   greenledOn = true;
-  choice = 0;
 }
 
 void sparkbot::syncLights()
