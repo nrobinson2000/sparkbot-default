@@ -45,10 +45,10 @@ public:
 
   void startup(); // Enable servos and pins
 
-  void switchLights();
-  void red();
-  void blue();
-  void green();
+  void switchLights(); // Cycle through the lights
+  void red();          // Turn the lights red
+  void blue();         // Turn the lights blue
+  void green();        // Turn the lights green
 
   void syncLights();
   void syncServos();
