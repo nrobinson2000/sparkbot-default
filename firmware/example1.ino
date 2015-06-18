@@ -1,4 +1,7 @@
-#include "sparkbot-default.h"
+
+
+// #include "sparkbot-default.h"
+
 /* Example 1:
 SparkBot: Tinker
 This file uses the SparkBot library and the Tinker framework to allow SparkBot to
@@ -6,7 +9,7 @@ be used with Tinker in the iPhone app.
 Can not compile because Core is selcected.
 Waiting for my photons to be delivered.
 */
-
+/*
 sparkbot sb;
 
 int tinkerDigitalRead(String pin);
@@ -23,7 +26,7 @@ void setup()
     Spark.function("analogread", tinkerAnalogRead);
     Spark.function("analogwrite", tinkerAnalogWrite);
 
-    sb.startup();
+    sb.begin();
 
 
 
@@ -112,3 +115,4 @@ int tinkerAnalogWrite(String command)
     }
     else return -2;
   }
+  */
