@@ -18,16 +18,19 @@ sparkbot::sparkbot()
   greenledOn = false;
 
   choice = 0; // Used for switching lights
+
+  onlineBots = 1;
 }
 
-void sparkbot::startup()
+void sparkbot::begin()
 {
   rightservo.attach(RIGHTSERVO); //Here we attach the three servos
   leftservo.attach(LEFTSERVO);
   neckservo.attach(NECKSERVO);
 
-  pinMode(RIGHTBUTTON, INPUT);  //We define the two button pins as inputs.
+  pinMode(RIGHTBUTTON, INPUT);  //We Enable the inputs.
   pinMode(LEFTBUTTON, INPUT);
+  pinMode(PHOTORESISTOR, INPUT);
 
   pinMode(REDLED, OUTPUT); //LEDs
   pinMode(BLUELED, OUTPUT);
@@ -47,10 +50,20 @@ void sparkbot::startup()
   Spark.variable("neck", &neckAngle, INT);
   Spark.variable("rightArm", &rightArmAngle, INT);
   Spark.variable("leftArm", &leftArmAngle, INT);
+  Spark.variable("brightness", &brightness, INT);
+
+  Spark.variable("onlineBots", &onlineBots, INT);
 
   Spark.function("moveNeck", (int (*)(String))&sparkbot::moveNeckCloud);
   Spark.function("moveRight", (int (*)(String))&sparkbot::moveRightCloud);
   Spark.function("moveLeft", (int (*)(String))&sparkbot::moveLeftCloud);
+  Spark.function("moodlights", (int (*)(String))&sparkbot::moodlights);
+  Spark.function("moodlights", (int (*)(String))&sparkbot::moodlights);
+  Spark.function("checkOnline", (int (*)(String))&sparkbot::checkOnline);
+
+
+  Spark.subscribe("online?", (EventHandler)&sparkbot::yesOnline, MY_DEVICES);
+  Spark.subscribe("yesOnline", (EventHandler)&sparkbot::updateOnline, MY_DEVICES);
 }
 
 
@@ -107,6 +120,15 @@ void sparkbot::green() //This function turns on the green, and turns off the red
   digitalWrite(GREENLED, HIGH);
   greenledOn = true;
 }
+
+int sparkbot::moodlights(const char *red, const char *green, const char *blue)
+{
+  analogWrite(REDLED, atoi(red));
+  analogWrite(GREENLED, atoi(green));
+  analogWrite(BLUELED, atoi(blue));
+  return 1;
+}
+
 
 void sparkbot::syncLights()
 {
@@ -231,9 +253,13 @@ switch (leftchanged)
   message += String("200");
 }
 
-Spark.publish("syncServos", message);
+  Spark.publish("syncServos", message);
+}
 
-
+void sparkbot::sync()
+{
+  syncLights();
+  syncServos();
 }
 
 void sparkbot::moveNeck(int value)
@@ -282,7 +308,11 @@ int sparkbot::moveLeftCloud(const char *data)
   return 1;
 }
 
-
+void sparkbot::initSlave()
+{
+  Spark.subscribe("syncServos", (EventHandler)&sparkbot::syncServosSlave, MY_DEVICES);
+  Spark.subscribe("RGB", (EventHandler)&sparkbot::RGBSlave, MY_DEVICES);
+}
 
 void sparkbot::syncServosSlave(const char *event, const char *data)
 {
@@ -345,27 +375,6 @@ void sparkbot::RGBSlave(const char *event, const char *data)
   }
 }
 
-float sparkbot::getTempC(int pin)
-{
-  float tempC;
-  tempC = analogRead(pin);
-  tempC = tempC * 0.48828125;
-  return tempC;
-}
-
-void sparkbot::initiateSlave()
-{
-Spark.subscribe("syncServos", (EventHandler)&sparkbot::syncServosSlave, MY_DEVICES);
-Spark.subscribe("RGB", (EventHandler)&sparkbot::RGBSlave, MY_DEVICES);
-
-}
-
-void sparkbot::sync()
-{
-syncLights();
-syncServos();
-}
-
 void sparkbot::startLeftButton()
 {
 attachInterrupt(LEFTBUTTON, (voidFuncPtr)&sparkbot::switchLights, RISING);
@@ -376,16 +385,40 @@ void sparkbot::startRightButton()
 attachInterrupt(RIGHTBUTTON, (voidFuncPtr)&sparkbot::sync, RISING);
 }
 
-int sparkbot::sparkbotsOnline()
+int sparkbot::checkOnline(const char *args)
 {
+  onlineBots = 1;
   Spark.publish("online?");
   return 1;
 }
 
-int sparkbot::moodlights(int red, int blue, int green)
+void sparkbot::yesOnline()
 {
-  analogWrite(REDLED, red);
-  analogWrite(BLUELED, blue);
-  analogWrite(GREENLED, green);
-  return 1;
+  Spark.publish("yesOnline");
+}
+
+void sparkbot::updateOnline()
+{
+  onlineBots++;
+}
+
+float sparkbot::getTempC(int pin)
+{
+  float tempC;
+  tempC = analogRead(pin);
+  tempC = tempC * 0.48828125;
+  return tempC;
+}
+
+int sparkbot::lightness()
+{
+  return analogRead(PHOTORESISTOR);
+}
+
+void sparkbot::refresh()
+{
+  brightness = lightness();
+  neckAngle = neckservo.read();
+  rightArmAngle = rightservo.read();
+  leftArmAngle = leftservo.read();
 }
