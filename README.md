@@ -28,7 +28,7 @@
 
     "onlineBots", returns the number of online SparkBots, checkOnline() must be called first to update the number.
 
-#SparkBot cloud Variables:
+#SparkBot cloud Functions:
 
     "moveNeck", Calls moveNeckCloud(int), integer from 0-180
     "moveRight", Calls moveRightCloud(int), integer from 0-180
