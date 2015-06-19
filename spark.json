@@ -1,6 +1,6 @@
 {
     "name": "sparkbot-default",
-    "version": "0.0.2",
+    "version": "0.0.5",
     "author": "Nathan Robinson <sparkbotkit@gmail.com>",
     "license": "GPL",
     "description": "Default Library for SparkBot."
