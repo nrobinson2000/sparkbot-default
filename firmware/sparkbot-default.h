@@ -21,12 +21,11 @@ public:
   #define MICROPHONE A3           //
   #define BUZZER A4               //
                                   //
-  #define IO1 A9                  //
-  #define IO2 A8                  //
-  #define IO3 A7                  //
-  #define IO4 A2                  //
-  #define IO5 A1                  //
-  #define IO6 A0                  //
+  #define IO1 A7                  //
+  #define IO2 A6                  //
+  #define IO3 A2                  //
+  #define IO4 A1                  //
+  #define IO5 A0                  //
                                   //
                                   //
   #define RIGHTSERVO D4           //
