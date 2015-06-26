@@ -58,7 +58,6 @@ void sparkbot::begin()
   Spark.function("moveRight", (int (*)(String))&sparkbot::moveRightCloud);
   Spark.function("moveLeft", (int (*)(String))&sparkbot::moveLeftCloud);
   Spark.function("moodlights", (int (*)(String))&sparkbot::moodlights);
-  Spark.function("moodlights", (int (*)(String))&sparkbot::moodlights);
   Spark.function("checkOnline", (int (*)(String))&sparkbot::checkOnline);
 
 
