@@ -40,7 +40,7 @@ sb.begin(); // This initializes the SparkBot.
 "moveNeck", Calls moveNeckCloud(int), integer from 0-180
 "moveRight", Calls moveRightCloud(int), integer from 0-180
 "moveLeft", Calls moveLeftCloud(int), integer from 0-180
-"moodlights", Calls moodlights(red, green, blue), 3 RGB values from 0-255
+"moodlights", Calls moodlightsCloud(red, green, blue), 3 RGB values from 0-255
 
 "checkOnline", Calls the checkOnline function, which updates "onlineBots".
 
