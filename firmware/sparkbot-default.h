@@ -58,7 +58,8 @@ public:
   void red();          // Turn the lights red
   void blue();         // Turn the lights blue
   void green();        // Turn the lights green
-  int moodlights(const char *red, const char *green, const char *blue);
+  int moodlightsCloud(const char *red, const char *green, const char *blue);
+  void moodlights(int red, int green, int blue);
 
   void syncLights();   // Master command: Sync lights with slaves.
   void syncServos();   // Master command: Sync servos with slaves.
@@ -89,6 +90,8 @@ public:
   float getTempC(int pin);
   int lightness();
   void refresh();
+  void sleep();
+  void poke();
 
 };
 #endif

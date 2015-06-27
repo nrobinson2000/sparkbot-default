@@ -22,6 +22,7 @@ sb.begin(); // This initializes the SparkBot.
 
 // sb.startRightButton(); // Start the Master bot process.
 
+// sleepInterval = 300000 // Change the sleep interval to 5 minutes.
 
 /*///CLOUD FUNCTIONS AND VARIABLES/////
 
@@ -42,7 +43,6 @@ sb.begin(); // This initializes the SparkBot.
 "moodlights", Calls moodlights(red, green, blue), 3 RGB values from 0-255
 
 "checkOnline", Calls the checkOnline function, which updates "onlineBots".
-
 
 */
 }
