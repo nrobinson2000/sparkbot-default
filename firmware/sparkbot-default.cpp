@@ -12,14 +12,17 @@ sparkbot::sparkbot()
   rightArmAngle = 0;
   leftArmAngle = 0;
 
-  // 3 LED Booleans
-  redledOn = false;
-  blueledOn = false;
-  greenledOn = false;
+  redValue = 0;
+  greenValue = 0;
+  blueValue = 0;
 
   choice = 0; // Used for switching lights
 
   onlineBots = 1;
+
+  lastAwoken = 0;
+  timeAwake = 0;
+  sleepInterval = 600000;
 }
 
 void sparkbot::begin()
@@ -92,39 +95,42 @@ void sparkbot::switchLights()
 
 void sparkbot::red() //This function turns on the red, and turns off the blue and green
 {
-  digitalWrite(REDLED, HIGH);
-  redledOn = true;
-  digitalWrite(BLUELED, LOW);
-  blueledOn = false;
-  digitalWrite(GREENLED, LOW);
-  greenledOn = false;
+  analogWrite(REDLED, 255);
+  redValue = 255;
+  analogWrite(BLUELED, 0);
+  blueValue = 0;
+  analogWrite(GREENLED, 0);
+  greenValue = 0;
 }
 
 void sparkbot::blue() //This function turns on the blue, and turns off the red and green
 {
-  digitalWrite(REDLED, LOW);
-  redledOn = false;
-  digitalWrite(BLUELED, HIGH);
-  blueledOn = true;
-  digitalWrite(GREENLED, LOW);
-  greenledOn = false;
+  analogWrite(REDLED, 0);
+  redValue = 0;
+  analogWrite(BLUELED, 255);
+  blueValue = 0;
+  analogWrite(GREENLED, 0);
+  greenValue = 0;
 }
 
 void sparkbot::green() //This function turns on the green, and turns off the red and blue
 {
-  digitalWrite(REDLED, LOW);
-  redledOn = false;
-  digitalWrite(BLUELED, LOW);
-  blueledOn = false;
-  digitalWrite(GREENLED, HIGH);
-  greenledOn = true;
+  analogWrite(REDLED, 0);
+  redValue = 0;
+  analogWrite(BLUELED, 0);
+  blueValue = 0;
+  analogWrite(GREENLED, 255);
+  greenValue = 255;
 }
 
 int sparkbot::moodlights(const char *red, const char *green, const char *blue)
 {
   analogWrite(REDLED, atoi(red));
+  redValue = atoi(red);
   analogWrite(GREENLED, atoi(green));
+  greenValue = atoi(green);
   analogWrite(BLUELED, atoi(blue));
+  blueValue = atoi(blue);
   return 1;
 }
 
@@ -132,17 +138,17 @@ int sparkbot::moodlights(const char *red, const char *green, const char *blue)
 void sparkbot::syncLights()
 {
   const char *color = "";
-  if (redledOn == true)
+  if (redValue == 255)
   {
     color = "red";
   }
 
-  if (blueledOn == true)
+  if (blueValue == 255)
   {
     color = "blue";
   }
 
-  if (greenledOn == true)
+  if (greenValue == 255)
   {
     color = "green";
   }
@@ -417,7 +423,18 @@ int sparkbot::lightness()
 void sparkbot::refresh()
 {
   brightness = lightness();
-  neckAngle = neckservo.read();
-  rightArmAngle = rightservo.read();
-  leftArmAngle = leftservo.read();
+  timeAwake = millis() - lastAwoken;
+
+
+  //neckAngle = neckservo.read();
+  //rightArmAngle = rightservo.read();
+  //leftArmAngle = leftservo.read();
+
+}
+
+void sparkbot::sleep()
+{
+  if
+
+
 }

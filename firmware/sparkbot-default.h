@@ -11,26 +11,26 @@ public:
   sparkbot();
 
   #define RIGHTBUTTON D7    //<photon pins>
-  #define LEFTBUTTON D3           //
+  #define LEFTBUTTON D6           //
                                   //
-  #define REDLED D0               //
-  #define BLUELED D1              //
-  #define GREENLED D2             //
+  #define REDLED D3               //
+  #define BLUELED A5              //
+  #define GREENLED A7             //
                                   //
-  #define PHOTORESISTOR A5        //
+  #define PHOTORESISTOR A0        //
   #define MICROPHONE A3           //
   #define BUZZER A4               //
                                   //
-  #define IO1 A7                  //
+  #define IO1 D4                  //
   #define IO2 A6                  //
   #define IO3 A2                  //
   #define IO4 A1                  //
-  #define IO5 A0                  //
+  #define IO5 D5                  //
                                   //
                                   //
-  #define RIGHTSERVO D4           //
-  #define LEFTSERVO D5            //
-  #define NECKSERVO D6      //</photon pins>
+  #define RIGHTSERVO D0           //
+  #define LEFTSERVO D1            //
+  #define NECKSERVO D2      //</photon pins>
 
 
   int neckAngle;            //<variables>
@@ -39,13 +39,18 @@ public:
                                   //
   int brightness;                 //
                                   //
-  bool redledOn;                  //
-  bool blueledOn;                 //
-  bool greenledOn;                //
+  int redValue;
+  int greenValue;
+  int blueValue;              //
                                   //
   int choice;                     //
                                   //
   int onlineBots;           //</variables>
+
+  bool asleep;
+  unsigned int lastAwoken;
+  unsigned int timeAwake;
+  unsigned int sleepInterval;
 
   void begin(); // Enable servos and pins
 
