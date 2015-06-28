@@ -456,6 +456,11 @@ void sparkbot::refresh()
 
 void sparkbot::sleep()
 {
+  if (asleep == 0)
+  {
+    return;
+  }
+
   if (asleep == false && timeAwake > sleepInterval)
   {
     asleep = true;
