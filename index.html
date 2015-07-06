@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Sparkbot-default by nrobinson2000</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-dark.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/nrobinson2000/sparkbot-default">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/nrobinson2000/sparkbot-default/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/nrobinson2000/sparkbot-default/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>Sparkbot-default</h1>
+          <p>The official SparkBot code library for the Particle IDE.</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/nrobinson2000">nrobinson2000</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
+
+        <h1>
+<a id="sparkbot-default" class="anchor" href="#sparkbot-default" aria-hidden="true"><span class="octicon octicon-link"></span></a>sparkbot-default</h1>
+
+<h1>
+<a id="about" class="anchor" href="#about" aria-hidden="true"><span class="octicon octicon-link"></span></a>About:</h1>
+
+<ul>
+<li>This is the default library for the SparkBot by Nathan Robinson.  This library contains all of the necessary functions and variables to make using SparkBot easier.</li>
+</ul>
+
+<h1>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>USAGE:</h1>
+
+<pre><code>#include "sparkbot-default.h" // Import the sparkbot-default library.
+
+sparkbot sb; // Create sb, an object of the sparkbot class.
+
+sb.begin(); // This initializes the SparkBot.
+</code></pre>
+
+<h1>
+<a id="additional-processes" class="anchor" href="#additional-processes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Additional processes:</h1>
+
+<pre><code>sb.initSlave(); // Configure this SparkBot as a slave bot.
+
+sb.sync(); // Master sync command.  Sync other slave bots to the settings of this SparkBot.
+
+sb.startLeftButton(); // Start the light switching process.
+
+sb.startRightButton(); // Start the Master bot process.
+</code></pre>
+
+<h1>
+<a id="sparkbot-cloud-variables" class="anchor" href="#sparkbot-cloud-variables" aria-hidden="true"><span class="octicon octicon-link"></span></a>SparkBot cloud Variables:</h1>
+
+<pre><code>"neck", returns the neckAngle of NECKSERVO
+"rightArm", returns the rightArmAngle of RIGHTSERVO
+"leftArm", returns the leftArmAngle LEFTSERVO
+"brightness", returns the brightness of PHOTORESISTOR
+
+"onlineBots", returns the number of online SparkBots, checkOnline() must be called first to update the number.
+</code></pre>
+
+<h1>
+<a id="sparkbot-cloud-functions" class="anchor" href="#sparkbot-cloud-functions" aria-hidden="true"><span class="octicon octicon-link"></span></a>SparkBot cloud Functions:</h1>
+
+<pre><code>"moveNeck", Calls moveNeckCloud(int), integer from 0-180
+"moveRight", Calls moveRightCloud(int), integer from 0-180
+"moveLeft", Calls moveLeftCloud(int), integer from 0-180
+"moodlights", Calls moodlights(red, green, blue), 3 RGB values from 0-255
+
+"checkOnline", Calls the checkOnline function, which updates "onlineBots".
+</code></pre>
+      </section>
+
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
