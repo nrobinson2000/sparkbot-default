@@ -31,7 +31,7 @@
 
       <section>
         <div id="title">
-          <h1>Sparkbot-default</h1>
+          <h1>SparkBot Default</h1>
           <p>The official SparkBot code library for the Particle IDE.</p>
           <hr>
           <span class="credits left">Project maintained by <a href="https://github.com/nrobinson2000">nrobinson2000</a></span>
@@ -39,14 +39,48 @@
         </div>
 
         <h1>
-<a id="sparkbot-default" class="anchor" href="#sparkbot-default" aria-hidden="true"><span class="octicon octicon-link"></span></a>sparkbot-default</h1>
+<a id="sparkbot-default" class="anchor" href="#sparkbot-default" aria-hidden="true"><span class="octicon octicon-link"></span></a></h1>
 
 <h1>
 <a id="about" class="anchor" href="#about" aria-hidden="true"><span class="octicon octicon-link"></span></a>About:</h1>
 
 <ul>
-<li>This is the default library for the SparkBot by Nathan Robinson.  This library contains all of the necessary functions and variables to make using SparkBot easier.</li>
+  <li>This is the original library for the SparkBot by Nathan Robinson.  This library contains all of the necessary processes, cloud functions and variables to simplify the use of SparkBot.</li>
+  <br>
+  <li>This library is written in C++, developed by Nathan Robinson for use with the Particle web IDE and Particle DEV.</li>
 </ul>
+
+<h1>
+<a id="installing" class="anchor" href="#installing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installing:</h1>
+<ul>
+  <li>SparkBot Default can be used with both Particles' web IDE, and Particle DEV, their amazing IDE based on Github Atom.</li>
+</ul>
+
+<h2>Installation on Web IDE:</h2>
+<ul>
+  <li><h3>1. Log into the <a href="https://build.particle.io">web IDE</a> on your browser.</h3></li>
+  <li><h3>2. Create a new app by clicking on the code tab and clicking on the create new app button. (You may have to scroll down.)</h3></li>
+  <img src="images/new-app.png">
+  <br><br>
+  <li><h3>3. Name your app.</h3></li>
+  <img src="images/app-name.png">
+  <br><br>
+  <li><h3>4. Import SparkBot Default:<br>Click on the libraries tab on the left, and then click on the blue contribute library button.  For the user_name/repo_name box, enter <strong>nrobinson2000/sparkbot-default</strong>.</h3></li>
+  <img src="images/enter-lib.png">
+  <br><br>
+  <li><h3>After clicking on the blue <strong>Add Repository</strong> button, click on the import button on the left.  Click the <strong>Got it, proceed</strong> button to continue.</h3></li>
+  <li><h3>Click on the <strong>Include in app</strong> button, and select the app you recently made.  Click the </strong>Add to this app</strong> to continue.    </h3></li>
+  <br>
+  <li><h3>5. Use SparkBot Default:<br><strong>In order to properly use SparkBot Default there are some mandatory lines you must add to your app.</strong>  First of all, you must add <code>sparkbot sb;</code> right after the <code>#include</code> statement.  This creates "sb" an object of class sparkbot, so you can just do stuff like <code>sb.WHATEVER();</code>  Next, you must add <code>sb.begin();</code> inside of the setup function.  This properly starts SparkBot, intializing the servos, sensors, lights etc.  Third, you must add <code>sb.refresh();</code> inside of the loop function.  This refrshes important variables like brightness, and updates the time it has been awake, checking if it is time for the SparkBot to go into sleep mode.</h3></li>
+  <br>
+  <h3><strong>Your code should look like this:</strong></h3>
+  <br>
+  <img src="images/code-example.png">
+  <br>
+  <br>
+  <h2><strong>Congratulations, you have now installed SparkBot Default for the Particle web IDE, and you have created your first app!</strong></h2>
+</ul>
+
 
 <h1>
 <a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>USAGE:</h1>
@@ -91,10 +125,12 @@ sb.startRightButton(); // Start the Master bot process.
 
 "checkOnline", Calls the checkOnline function, which updates "onlineBots".
 </code></pre>
+
+
       </section>
 
     </div>
     <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-    
+
   </body>
 </html>
