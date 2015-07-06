@@ -83,47 +83,65 @@
 
 
 <h1>
-<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>USAGE:</h1>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage:</h1>
 
-<code>#include "sparkbot-default.h" // Import the sparkbot-default library.
-
-sparkbot sb; // Create sb, an object of the sparkbot class.
-
-sb.begin(); // This initializes the SparkBot.
+<code>
+<ul>
+<li>#include "sparkbot-default.h" // Import the sparkbot-default library.</li>
+<br>
+<li>sparkbot sb; // Create sb, an object of the sparkbot class.</li>
+<br>
+<li>sb.begin(); // This initializes the SparkBot.</li>
+</ul>
 </code>
 
 <h1>
 <a id="additional-processes" class="anchor" href="#additional-processes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Additional processes:</h1>
 
-<code>sb.initSlave(); // Configure this SparkBot as a slave bot.
-
-sb.sync(); // Master sync command.  Sync other slave bots to the settings of this SparkBot.
-
-sb.startLeftButton(); // Start the light switching process.
-
-sb.startRightButton(); // Start the Master bot process.
+<code>
+<ul>
+<li>sb.initSlave(); // Configure this SparkBot as a slave bot.</li>
+<br>
+<li>sb.sync(); // Master sync command.  Sync other slave bots to the settings of this SparkBot.</li>
+<br>
+<li>sb.startLeftButton(); // Start the light switching process.</li>
+<br>
+<li>sb.startRightButton(); // Start the Master bot process.</li>
+</ul>
 </code>
 
 <h1>
 <a id="sparkbot-cloud-variables" class="anchor" href="#sparkbot-cloud-variables" aria-hidden="true"><span class="octicon octicon-link"></span></a>SparkBot cloud Variables:</h1>
 
-<code>"neck", returns the neckAngle of NECKSERVO
-"rightArm", returns the rightArmAngle of RIGHTSERVO
-"leftArm", returns the leftArmAngle LEFTSERVO
-"brightness", returns the brightness of PHOTORESISTOR
-
-"onlineBots", returns the number of online SparkBots, checkOnline() must be called first to update the number.
+<code>
+<ul>
+<li>"neck", returns the neckAngle of NECKSERVO</li>
+<br>
+<li>"rightArm", returns the rightArmAngle of RIGHTSERVO</li>
+<br>
+<li>"leftArm", returns the leftArmAngle LEFTSERVO</li>
+<br>
+<li>"brightness", returns the brightness of PHOTORESISTOR</li>
+<br>
+<li>"onlineBots", returns the number of online SparkBots, checkOnline() must be called first to update the number.</li>
+</ul>
 </code>
 
 <h1>
 <a id="sparkbot-cloud-functions" class="anchor" href="#sparkbot-cloud-functions" aria-hidden="true"><span class="octicon octicon-link"></span></a>SparkBot cloud Functions:</h1>
 
-<code>"moveNeck", Calls moveNeckCloud(int), integer from 0-180
-"moveRight", Calls moveRightCloud(int), integer from 0-180
-"moveLeft", Calls moveLeftCloud(int), integer from 0-180
-"moodlights", Calls moodlights(red, green, blue), 3 RGB values from 0-255
-
-"checkOnline", Calls the checkOnline function, which updates "onlineBots".
+<code>
+<ul>
+<li>"moveNeck", Calls moveNeckCloud(int), integer from 0-180</li>
+<br>
+<li>"moveRight", Calls moveRightCloud(int), integer from 0-180</li>
+<br>
+<li>"moveLeft", Calls moveLeftCloud(int), integer from 0-180</li>
+<br>
+<li>"moodlights", Calls moodlights(red, green, blue), 3 RGB values from 0-255</li>
+<br>
+<li>"checkOnline", Calls the checkOnline function, which updates "onlineBots".</li>
+</ul>
 </code>
 
 
