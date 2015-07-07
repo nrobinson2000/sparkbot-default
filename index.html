@@ -110,22 +110,15 @@
 </ul>
 </code>
 
-<h1>
-<a id="sparkbot-cloud-variables" class="anchor" href="#sparkbot-cloud-variables" aria-hidden="true"><span class="octicon octicon-link"></span></a>SparkBot cloud Variables:</h1>
-
-<code>
+<h1>Cloud API:</h1>
 <ul>
-<li>"neck", returns the neckAngle of NECKSERVO</li>
+<li>SparkBot Default allows SparkBot to be easily used with the Particle API, allowing users to montior variables, call functions and remotely control SparkBot, giving wide control over its actions.</li>
 <br>
-<li>"rightArm", returns the rightArmAngle of RIGHTSERVO</li>
+<li>Using Particle's API is simple, everything you need to know can be found on the <a href="http://docs.particle.io/photon/api/">Particle API page.</a></li>
 <br>
-<li>"leftArm", returns the leftArmAngle LEFTSERVO</li>
-<br>
-<li>"brightness", returns the brightness of PHOTORESISTOR</li>
-<br>
-<li>"onlineBots", returns the number of online SparkBots, checkOnline() must be called first to update the number.</li>
+<li>Below are the cloud functions and variables that are included in SparkBot Default.</li>
+
 </ul>
-</code>
 
 <h1>
 <a id="sparkbot-cloud-functions" class="anchor" href="#sparkbot-cloud-functions" aria-hidden="true"><span class="octicon octicon-link"></span></a>SparkBot cloud Functions:</h1>
@@ -144,6 +137,29 @@
 </ul>
 </code>
 
+<h1>
+<a id="sparkbot-cloud-variables" class="anchor" href="#sparkbot-cloud-variables" aria-hidden="true"><span class="octicon octicon-link"></span></a>SparkBot cloud Variables:</h1>
+
+<code>
+<ul>
+<li>"neck", returns the neckAngle of NECKSERVO</li>
+<br>
+<li>"rightArm", returns the rightArmAngle of RIGHTSERVO</li>
+<br>
+<li>"leftArm", returns the leftArmAngle LEFTSERVO</li>
+<br>
+<li>"brightness", returns the brightness of PHOTORESISTOR</li>
+<br>
+<li>"onlineBots", returns the number of online SparkBots, checkOnline() must be called first to update the number.</li>
+</ul>
+</code>
+
+<h1>More functions:</h1>
+<ul>
+<li>There are many more SparkBot default functions, not all of them are cloud functions, but there are helper processes and functions that will make programming SparkBot less difficult.</li>
+<br>
+<li>A look at the <a href="https://github.com/nrobinson2000/sparkbot-default/blob/master/firmware/sparkbot-default.h">Sparkbot Default header file</a> should give you an idea of the included functions.</li>
+</ul>
 
       </section>
 
