@@ -409,12 +409,12 @@ void sparkbot::RGBSlave(const char *event, const char *data)
 
 void sparkbot::startLeftButton()
 {
-attachInterrupt(LEFTBUTTON, (voidFuncPtr)&sparkbot::switchLights, RISING);
+attachInterrupt(LEFTBUTTON, (raw_interrupt_handler_t)&sparkbot::switchLights, RISING);
 }
 
 void sparkbot::startRightButton()
 {
-attachInterrupt(RIGHTBUTTON, (voidFuncPtr)&sparkbot::sync, RISING);
+attachInterrupt(RIGHTBUTTON, (raw_interrupt_handler_t)&sparkbot::sync, RISING);
 }
 
 int sparkbot::checkOnline(const char *args)
