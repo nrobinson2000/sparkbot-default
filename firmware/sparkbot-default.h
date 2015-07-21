@@ -21,11 +21,11 @@ public:
   #define MICROPHONE A3           //
   #define BUZZER A4               //
                                   //
-  #define IO1 D4                  //
-  #define IO2 A6                  //
-  #define IO3 A2                  //
-  #define IO4 A1                  //
-  #define IO5 D5                  //
+  #define I0 A6                   //
+  #define I1 A1                   //
+  #define I2 A2                   //
+  #define I3 D5                   //
+  #define I5 D4                   //
                                   //
                                   //
   #define RIGHTSERVO D0           //
@@ -39,9 +39,9 @@ public:
                                   //
   int brightness;                 //
                                   //
-  int redValue;
-  int greenValue;
-  int blueValue;              //
+  int redValue;                   //
+  int greenValue;                 //
+  int blueValue;                  //
                                   //
   int choice;                     //
                                   //
