@@ -17,6 +17,7 @@ void setup() // Mandatory setup function.
     Spark.function("digitalwrite", tinkerDigitalWrite);
     Spark.function("analogread", tinkerAnalogRead);
     Spark.function("analogwrite", tinkerAnalogWrite);
+
 sb.begin(); // This initializes the SparkBot.
             //It starts all the pins, servos, cloud variables, functions and subscriptions.
 
