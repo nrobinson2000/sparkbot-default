@@ -25,6 +25,8 @@ sparkbot::sparkbot()
   sleepInterval = 600000;
 
   asleep = false;
+
+  slaveMode = false;
 }
 
 void sparkbot::begin()
@@ -63,9 +65,11 @@ void sparkbot::begin()
   Spark.function("moveRight", (int (*)(String))&sparkbot::moveRightCloud);
   Spark.function("moveLeft", (int (*)(String))&sparkbot::moveLeftCloud);
   Spark.function("moodlights", (int (*)(String))&sparkbot::moodlightsCloud);
-  Spark.function("checkOnline", (int (*)(String))&sparkbot::checkOnline);
 
-  Spark.function("enableSlave", (int (*)(String))&sparkbot:slaveToggle);
+  Spark.function("enableSlave", (int (*)(String))&sparkbot::slaveToggle);
+
+  Spark.subscribe("syncServos", (EventHandler)&sparkbot::syncServosSlave, MY_DEVICES);
+  Spark.subscribe("RGB", (EventHandler)&sparkbot::RGBSlave, MY_DEVICES);
 }
 
 
@@ -127,15 +131,15 @@ void sparkbot::green() //This function turns on the green, and turns off the red
   greenValue = 255;
 }
 
-int sparkbot::moodlightsCloud(const char *red, const char *green, const char *blue)
+int sparkbot::moodlightsCloud(String red, String green, String blue)
 {
   poke();
-  analogWrite(REDLED, atoi(red));
-  redValue = atoi(red);
-  analogWrite(GREENLED, atoi(green));
-  greenValue = atoi(green);
-  analogWrite(BLUELED, atoi(blue));
-  blueValue = atoi(blue);
+  analogWrite(REDLED, red.toInt());
+  redValue = red.toInt();
+  analogWrite(GREENLED, green.toInt());
+  greenValue = green.toInt();
+  analogWrite(BLUELED, blue.toInt());
+  blueValue = blue.toInt();
   return 1;
 }
 
@@ -317,49 +321,42 @@ void sparkbot::stopBuzzer()
   analogWrite(BUZZER, 0);
 }
 
-int sparkbot::moveNeckCloud(const char *data)
+int sparkbot::moveNeckCloud(String data)
 {
   poke();
-  sparkbot::moveNeck(atoi(data));
+  sparkbot::moveNeck(data.toInt());
   return 1;
 }
 
-int sparkbot::moveRightCloud(const char *data)
+int sparkbot::moveRightCloud(String data)
 {
   poke();
-  sparkbot::moveRight(atoi(data));
+  sparkbot::moveRight(data.toInt());
   return 1;
 }
 
-int sparkbot::moveLeftCloud(const char *data)
+int sparkbot::moveLeftCloud(String data)
 {
   poke();
-  sparkbot::moveLeft(atoi(data));
+  sparkbot::moveLeft(data.toInt());
   return 1;
 }
 
-void sparkbot::initSlave()
-{
-  Spark.subscribe("syncServos", (EventHandler)&sparkbot::syncServosSlave, MY_DEVICES);
-  Spark.subscribe("RGB", (EventHandler)&sparkbot::RGBSlave, MY_DEVICES);
-}
 
-int slaveToggle(const char *toggle)
+int sparkbot::slaveToggle(String data)
 {
-  if (strcmp(toggle, "true") == 0)
-  {
-    slaveMode = true;
-    sparkbot::initSlave();
-    return 1;
-  }
-
-  if (strcmp(toggle, "false") == 0)
+  if (slaveMode == true)
   {
     slaveMode = false;
     return 1;
   }
 
-  return -1;
+  if (slaveMode == false)
+  {
+    slaveMode = true;
+    return 2;
+  }
+
 }
 
 void sparkbot::syncServosSlave(const char *event, const char *data)

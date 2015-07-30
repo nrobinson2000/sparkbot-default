@@ -1,3 +1,4 @@
+#include "application.h"
 #ifndef sparkbot_default_h
 #define sparkbot_default_h
 
@@ -59,7 +60,7 @@ public:
   void red();          // Turn the lights red
   void blue();         // Turn the lights blue
   void green();        // Turn the lights green
-  int moodlightsCloud(const char *red, const char *green, const char *blue);
+  int moodlightsCloud(String red, String green, String blue);
   void moodlights(int red, int green, int blue);
 
   void syncLights();   // Master command: Sync lights with slaves.
@@ -73,16 +74,17 @@ public:
   void playBuzzer(int value);
   void stopBuzzer();
 
-  void initSlave();
   void syncServosSlave(const char *event, const char *data);
   void RGBSlave(const char *event, const char *data);
+
+  int slaveToggle(String data);
 
   void startLeftButton();
   void startRightButton();
 
-  int moveNeckCloud(const char *data);
-  int moveRightCloud(const char *data);
-  int moveLeftCloud(const char *data);
+  int moveNeckCloud(String data);
+  int moveRightCloud(String data);
+  int moveLeftCloud(String data);
 
   float getTempC(int pin);
   int lightness();
