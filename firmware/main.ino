@@ -11,8 +11,6 @@ int tinkerDigitalWrite(String command);
 int tinkerAnalogRead(String pin);
 int tinkerAnalogWrite(String command);
 
-sb.sleepInterval = 300000;  // Change the sleep interval to 5 minutes.
-
 void setup() // Mandatory setup function.
 {
   Spark.function("digitalread", tinkerDigitalRead);
