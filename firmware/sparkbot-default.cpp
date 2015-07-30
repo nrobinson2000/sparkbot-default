@@ -23,6 +23,8 @@ sparkbot::sparkbot()
   lastAwoken = 0;
   timeAwake = 0;
   sleepInterval = 600000;
+
+  asleep = false;
 }
 
 void sparkbot::begin()
@@ -63,9 +65,7 @@ void sparkbot::begin()
   Spark.function("moodlights", (int (*)(String))&sparkbot::moodlightsCloud);
   Spark.function("checkOnline", (int (*)(String))&sparkbot::checkOnline);
 
-
-  Spark.subscribe("online?", (EventHandler)&sparkbot::yesOnline, MY_DEVICES);
-  Spark.subscribe("yesOnline", (EventHandler)&sparkbot::updateOnline, MY_DEVICES);
+  Spark.function("enableSlave", (int (*)(String))&sparkbot:slaveToggle);
 }
 
 
@@ -344,8 +344,28 @@ void sparkbot::initSlave()
   Spark.subscribe("RGB", (EventHandler)&sparkbot::RGBSlave, MY_DEVICES);
 }
 
+int slaveToggle(const char *toggle)
+{
+  if (strcmp(toggle, "true") == 0)
+  {
+    slaveMode = true;
+    sparkbot::initSlave();
+    return 1;
+  }
+
+  if (strcmp(toggle, "false") == 0)
+  {
+    slaveMode = false;
+    return 1;
+  }
+
+  return -1;
+}
+
 void sparkbot::syncServosSlave(const char *event, const char *data)
 {
+  if (slaveMode == false) {return;}
+
   poke();
   String message = String(data);
   String neckresult = String(message.charAt(0) + message.charAt(1) + message.charAt(2));
@@ -390,6 +410,7 @@ void sparkbot::syncServosSlave(const char *event, const char *data)
 
 void sparkbot::RGBSlave(const char *event, const char *data)
 {
+  if (slaveMode == false) {return;}
   poke();
   if (strcmp(data, "red") == 0)
   {
@@ -417,23 +438,6 @@ void sparkbot::startRightButton()
 attachInterrupt(RIGHTBUTTON, (raw_interrupt_handler_t)&sparkbot::sync, RISING);
 }
 
-int sparkbot::checkOnline(const char *args)
-{
-  onlineBots = 1;
-  Spark.publish("online?");
-  return 1;
-}
-
-void sparkbot::yesOnline()
-{
-  Spark.publish("yesOnline");
-}
-
-void sparkbot::updateOnline()
-{
-  onlineBots++;
-}
-
 float sparkbot::getTempC(int pin)
 {
   float tempC;
@@ -456,7 +460,7 @@ void sparkbot::refresh()
 
 void sparkbot::sleep()
 {
-  if (asleep == 0)
+  if (asleep == true)
   {
     return;
   }

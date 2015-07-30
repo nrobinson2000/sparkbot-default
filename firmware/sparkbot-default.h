@@ -48,6 +48,7 @@ public:
   int onlineBots;           //</variables>
 
   bool asleep;
+  bool slaveMode;
   unsigned int lastAwoken;
   unsigned int timeAwake;
   unsigned int sleepInterval;
@@ -82,10 +83,6 @@ public:
   int moveNeckCloud(const char *data);
   int moveRightCloud(const char *data);
   int moveLeftCloud(const char *data);
-
-  int checkOnline(const char *args);
-  void yesOnline();
-  void updateOnline();
 
   float getTempC(int pin);
   int lightness();
