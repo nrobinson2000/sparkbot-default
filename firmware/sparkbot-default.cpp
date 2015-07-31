@@ -60,6 +60,7 @@ void sparkbot::begin()
 
   auto slaveHandler = std::bind(&sparkbot::slaveToggle, this, std::placeholders::_1);
   Spark.function("enableSlave", slaveHandler);
+  Serial.begin(9600);
 }
 
 void sparkbot::switchLights()
