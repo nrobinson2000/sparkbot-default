@@ -2,10 +2,13 @@
 #ifndef sparkbot_default_h
 #define sparkbot_default_h
 
+
 class sparkbot
 {
 private:
   //Nothing
+
+
 
 public:
 
@@ -48,6 +51,8 @@ public:
 
 
   bool slaveMode;
+
+  int moveWrapper(String data);
 
   void begin(); // Enable servos and pins
 

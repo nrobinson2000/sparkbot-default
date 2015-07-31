@@ -4,6 +4,14 @@
 Servo rightservo;
 Servo leftservo;
 Servo neckservo;
+sparkbot sb;
+
+extern "C" int moveWrapper(String data);
+
+
+
+//int attachWrapper()
+
 
 sparkbot::sparkbot()
 {
@@ -50,12 +58,17 @@ void sparkbot::begin()
   Spark.variable("rightArm", &rightArmAngle, INT);
   Spark.variable("leftArm", &leftArmAngle, INT);
   Spark.variable("brightness", &brightness, INT);
-  Spark.function("moveServos", (int (*)(String))&sparkbot::moveCloud);
+
+  auto moveHandler = std::bind(&sparkbot::moveCloud, &sb, std::placeholders::_1);
+
+  Spark.function("moveServos", &moveHandler);
+  /*
   Spark.function("moodlights", (int (*)(String))&sparkbot::moodlightsCloud);
   Spark.function("enableSlave", (int (*)(String))&sparkbot::slaveToggle);
 
   Spark.subscribe("syncServos", (EventHandler)&sparkbot::syncServosSlave, MY_DEVICES);
   Spark.subscribe("RGB", (EventHandler)&sparkbot::RGBSlave, MY_DEVICES);
+  */
 }
 
 Give me warnings
