@@ -20,12 +20,6 @@ sparkbot::sparkbot()
 
   onlineBots = 1;
 
-  lastAwoken = 0;
-  timeAwake = 0;
-  sleepInterval = 600000;
-
-  asleep = false;
-
   slaveMode = false;
 }
 
@@ -65,17 +59,15 @@ void sparkbot::begin()
   Spark.function("moveRight", (int (*)(String))&sparkbot::moveRightCloud);
   Spark.function("moveLeft", (int (*)(String))&sparkbot::moveLeftCloud);
   Spark.function("moodlights", (int (*)(String))&sparkbot::moodlightsCloud);
-
   Spark.function("enableSlave", (int (*)(String))&sparkbot::slaveToggle);
 
   Spark.subscribe("syncServos", (EventHandler)&sparkbot::syncServosSlave, MY_DEVICES);
-  Spark.subscribe("RGB", (EventHandler)&sparkbot::RGBSlave, MY_DEVICES);
+  Spark.subscribe("RGB", (EventHandler)&sparkbot::RGBSlave, MY_DEVICES);  
 }
 
 
 void sparkbot::switchLights()
 {
-  poke();
   if (choice == 0)
   {
     red();
@@ -100,7 +92,6 @@ void sparkbot::switchLights()
 
 void sparkbot::red() //This function turns on the red, and turns off the blue and green
 {
-  poke();
   analogWrite(REDLED, 255);
   redValue = 255;
   analogWrite(BLUELED, 0);
@@ -111,7 +102,6 @@ void sparkbot::red() //This function turns on the red, and turns off the blue an
 
 void sparkbot::blue() //This function turns on the blue, and turns off the red and green
 {
-  poke();
   analogWrite(REDLED, 0);
   redValue = 0;
   analogWrite(BLUELED, 255);
@@ -122,7 +112,6 @@ void sparkbot::blue() //This function turns on the blue, and turns off the red a
 
 void sparkbot::green() //This function turns on the green, and turns off the red and blue
 {
-  poke();
   analogWrite(REDLED, 0);
   redValue = 0;
   analogWrite(BLUELED, 0);
@@ -133,7 +122,6 @@ void sparkbot::green() //This function turns on the green, and turns off the red
 
 int sparkbot::moodlightsCloud(String red, String green, String blue)
 {
-  poke();
   analogWrite(REDLED, red.toInt());
   redValue = red.toInt();
   analogWrite(GREENLED, green.toInt());
@@ -156,7 +144,6 @@ void sparkbot::moodlights(int red, int green, int blue)
 
 void sparkbot::syncLights()
 {
-  poke();
   const char *color = "";
   if (redValue == 255)
   {
@@ -178,7 +165,6 @@ void sparkbot::syncLights()
 
 void sparkbot::syncServos()
 {
-  poke();
   String message = String("");
   String neckdata = String("");
   String rightdata = String("");
@@ -290,54 +276,46 @@ void sparkbot::sync()
 
 void sparkbot::moveNeck(int value)
 {
-  poke();
   neckservo.write(value);
   neckAngle = neckservo.read();
 }
 
 void sparkbot::moveRight(int value)
 {
-  poke();
   rightservo.write(value);
   rightArmAngle = rightservo.read();
 }
 
 void sparkbot::moveLeft(int value)
 {
-  poke();
   leftservo.write(value);
   leftArmAngle = leftservo.read();
 }
 
 void sparkbot::playBuzzer(int value)
 {
-  poke();
   analogWrite(BUZZER, value);
 }
 
 void sparkbot::stopBuzzer()
 {
-  poke();
   analogWrite(BUZZER, 0);
 }
 
 int sparkbot::moveNeckCloud(String data)
 {
-  poke();
   sparkbot::moveNeck(data.toInt());
   return 1;
 }
 
 int sparkbot::moveRightCloud(String data)
 {
-  poke();
   sparkbot::moveRight(data.toInt());
   return 1;
 }
 
 int sparkbot::moveLeftCloud(String data)
 {
-  poke();
   sparkbot::moveLeft(data.toInt());
   return 1;
 }
@@ -363,7 +341,6 @@ void sparkbot::syncServosSlave(const char *event, const char *data)
 {
   if (slaveMode == false) {return;}
 
-  poke();
   String message = String(data);
   String neckresult = String(message.charAt(0) + message.charAt(1) + message.charAt(2));
   String rightresult = String(message.charAt(3) + message.charAt(4) + message.charAt(5));
@@ -408,7 +385,7 @@ void sparkbot::syncServosSlave(const char *event, const char *data)
 void sparkbot::RGBSlave(const char *event, const char *data)
 {
   if (slaveMode == false) {return;}
-  poke();
+
   if (strcmp(data, "red") == 0)
   {
     red();
@@ -451,31 +428,4 @@ int sparkbot::lightness()
 void sparkbot::refresh()
 {
   brightness = lightness();
-  timeAwake = millis() - lastAwoken;
-  sleep();
-}
-
-void sparkbot::sleep()
-{
-  if (asleep == true)
-  {
-    return;
-  }
-
-  if (asleep == false && timeAwake > sleepInterval)
-  {
-    asleep = true;
-    moodlights(0,0,0);
-    RGB.control(true);
-    RGB.brightness(0);
-  }
-}
-
-void sparkbot::poke()
-{
-  asleep = false;
-  lastAwoken = millis();
-  timeAwake = 0;
-  RGB.control(false);
-  moodlights(redValue, greenValue, blueValue);
 }
