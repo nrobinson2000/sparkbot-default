@@ -66,10 +66,15 @@ void sparkbot::begin()
   Spark.function("moveLeft", (int (*)(String))&sparkbot::moveLeftCloud);
   Spark.function("moodlights", (int (*)(String))&sparkbot::moodlightsCloud);
 
+  Spark.function("checkOnline", (int (*)(String))&sparkbot::checkOnline);
+
   Spark.function("enableSlave", (int (*)(String))&sparkbot::slaveToggle);
 
   Spark.subscribe("syncServos", (EventHandler)&sparkbot::syncServosSlave, MY_DEVICES);
   Spark.subscribe("RGB", (EventHandler)&sparkbot::RGBSlave, MY_DEVICES);
+
+  Spark.subscribe("online?", (EventHandler)&sparkbot::yesOnline, MY_DEVICES);
+  Spark.subscribe("yesOnline", (EventHandler)&sparkbot::updateOnline, MY_DEVICES);
 }
 
 
@@ -478,4 +483,21 @@ void sparkbot::poke()
   timeAwake = 0;
   RGB.control(false);
   moodlights(redValue, greenValue, blueValue);
+}
+
+int sparkbot::checkOnline(const char *args)
+{
+  onlineBots = 1;
+  Spark.publish("online?");
+  return 1;
+}
+
+void sparkbot::yesOnline()
+{
+  Spark.publish("yesOnline");
+}
+
+void sparkbot::updateOnline()
+{
+  onlineBots++;
 }

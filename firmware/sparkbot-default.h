@@ -92,5 +92,9 @@ public:
   void sleep();
   void poke();
 
+  int checkOnline(const char *args);
+  void yesOnline();
+  void updateOnline();
+
 };
 #endif
