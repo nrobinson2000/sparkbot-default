@@ -7,9 +7,25 @@
 
 sparkbot sb; // Create sb, an object of the sparkbot class.
 
+void syncServosHandler(const char *event, const char *data)
+{
+  sb.syncServosSlave(event, data);
+}
+
+void RGBSlaveHandler(const char *event, const char *data)
+{
+sb.RGBSlave(event, data);
+}
+
+
 void setup() // Mandatory setup function.
 {
-sb.begin(); // This initializes the SparkBot.
+sb.begin();
+ Spark.subscribe("syncServos", &syncServosHandler, MY_DEVICES);
+ Spark.subscribe("RGB", &RGBSlaveHandler, MY_DEVICES);
+
+
+  // This initializes the SparkBot.
             //It starts all the pins, servos, cloud variables, functions and subscriptions.
 
 /////Start other SparkBot processes below./////

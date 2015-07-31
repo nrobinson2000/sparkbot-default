@@ -60,16 +60,7 @@ void sparkbot::begin()
 
   auto slaveHandler = std::bind(&sparkbot::slaveToggle, this, std::placeholders::_1);
   Spark.function("enableSlave", slaveHandler);
-
-  auto syncServosHandler = std::bind(&sparkbot::syncServosSlave, this, std::placeholders::_1);
-  Spark.subscribe("syncServos", syncServosHandler, MY_DEVICES);
-
-  auto RGBHandler = std::bind(&sparkbot::RGBSlave, this, std::placeholders::_1);
-  Spark.subscribe("RGB", RGBHandler, MY_DEVICES);
-
 }
-
-Give me warnings
 
 void sparkbot::switchLights()
 {
@@ -408,13 +399,13 @@ void sparkbot::RGBSlave(const char *event, const char *data)
 
 void sparkbot::startLeftButton()
 {
-  auto leftInterruptHandler = std::bind(&sparkbot::switchLights, this, std::placeholders::_1);
+  auto leftInterruptHandler = std::bind(&sparkbot::switchLights, this);
   attachInterrupt(LEFTBUTTON, leftInterruptHandler, RISING);
 }
 
 void sparkbot::startRightButton()
 {
-  auto rightInterruptHandler = std::bind(&sparkbot::sync, this, std::placeholders::_1);
+  auto rightInterruptHandler = std::bind(&sparkbot::sync, this);
   attachInterrupt(RIGHTBUTTON, rightInterruptHandler, RISING);
 }
 
