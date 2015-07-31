@@ -48,11 +48,7 @@ public:
                                   //
   int onlineBots;           //</variables>
 
-  bool asleep;
   bool slaveMode;
-  unsigned int lastAwoken;
-  unsigned int timeAwake;
-  unsigned int sleepInterval;
 
   void begin(); // Enable servos and pins
 
@@ -89,12 +85,5 @@ public:
   float getTempC(int pin);
   int lightness();
   void refresh();
-  void sleep();
-  void poke();
-
-  int checkOnline(const char *args);
-  void yesOnline();
-  void updateOnline();
-
 };
 #endif
