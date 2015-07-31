@@ -4,13 +4,6 @@
 Servo rightservo;
 Servo leftservo;
 Servo neckservo;
-sparkbot sb;
-
-extern "C" int moveWrapper(String data);
-
-
-
-//int attachWrapper()
 
 
 sparkbot::sparkbot()
@@ -59,16 +52,21 @@ void sparkbot::begin()
   Spark.variable("leftArm", &leftArmAngle, INT);
   Spark.variable("brightness", &brightness, INT);
 
-  auto moveHandler = std::bind(&sparkbot::moveCloud, &sb, std::placeholders::_1);
+  auto moveHandler = std::bind(&sparkbot::moveCloud, this, std::placeholders::_1);
+  Spark.function("moveServos", moveHandler);
 
-  Spark.function("moveServos", &moveHandler);
-  /*
-  Spark.function("moodlights", (int (*)(String))&sparkbot::moodlightsCloud);
-  Spark.function("enableSlave", (int (*)(String))&sparkbot::slaveToggle);
+  auto moodHandler = std::bind(&sparkbot::moodlightsCloud, this, std::placeholders::_1);
+  Spark.function("moodlights", moodHandler);
 
-  Spark.subscribe("syncServos", (EventHandler)&sparkbot::syncServosSlave, MY_DEVICES);
-  Spark.subscribe("RGB", (EventHandler)&sparkbot::RGBSlave, MY_DEVICES);
-  */
+  auto slaveHandler = std::bind(&sparkbot::slaveToggle, this, std::placeholders::_1);
+  Spark.function("enableSlave", slaveHandler);
+
+  auto syncServosHandler = std::bind(&sparkbot::syncServosSlave, this, std::placeholders::_1);
+  Spark.subscribe("syncServos", syncServosHandler, MY_DEVICES);
+
+  auto RGBHandler = std::bind(&sparkbot::RGBSlave, this, std::placeholders::_1);
+  Spark.subscribe("RGB", RGBHandler, MY_DEVICES);
+
 }
 
 Give me warnings
@@ -410,12 +408,14 @@ void sparkbot::RGBSlave(const char *event, const char *data)
 
 void sparkbot::startLeftButton()
 {
-attachInterrupt(LEFTBUTTON, (raw_interrupt_handler_t)&sparkbot::switchLights, RISING);
+  auto leftInterruptHandler = std::bind(&sparkbot::switchLights, this, std::placeholders::_1);
+  attachInterrupt(LEFTBUTTON, leftInterruptHandler, RISING);
 }
 
 void sparkbot::startRightButton()
 {
-attachInterrupt(RIGHTBUTTON, (raw_interrupt_handler_t)&sparkbot::sync, RISING);
+  auto rightInterruptHandler = std::bind(&sparkbot::sync, this, std::placeholders::_1);
+  attachInterrupt(RIGHTBUTTON, rightInterruptHandler, RISING);
 }
 
 float sparkbot::getTempC(int pin)
