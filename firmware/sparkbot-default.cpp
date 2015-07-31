@@ -425,4 +425,8 @@ int sparkbot::lightness()
 void sparkbot::refresh()
 {
   brightness = lightness();
+  neckAngle = neckservo.read();
+  rightArmAngle = rightservo.read();
+  leftArmAngle = leftservo.read();
+
 }
