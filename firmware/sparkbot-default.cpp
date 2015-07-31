@@ -59,11 +59,10 @@ void sparkbot::begin()
   Spark.function("moveRight", (int (*)(String))&sparkbot::moveRightCloud);
   Spark.function("moveLeft", (int (*)(String))&sparkbot::moveLeftCloud);
   Spark.function("moodlights", (int (*)(String))&sparkbot::moodlightsCloud);
-
   Spark.function("enableSlave", (int (*)(String))&sparkbot::slaveToggle);
 
   Spark.subscribe("syncServos", (EventHandler)&sparkbot::syncServosSlave, MY_DEVICES);
-  Spark.subscribe("RGB", (EventHandler)&sparkbot::RGBSlave, MY_DEVICES);
+  Spark.subscribe("RGB", (EventHandler)&sparkbot::RGBSlave, MY_DEVICES);  
 }
 
 
