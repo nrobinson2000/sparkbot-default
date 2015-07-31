@@ -44,9 +44,8 @@ public:
   int greenValue;                 //
   int blueValue;                  //
                                   //
-  int choice;                     //
-                                  //
-  int onlineBots;           //</variables>
+  int choice;
+
 
   bool slaveMode;
 
@@ -56,7 +55,7 @@ public:
   void red();          // Turn the lights red
   void blue();         // Turn the lights blue
   void green();        // Turn the lights green
-  int moodlightsCloud(String red, String green, String blue);
+  int moodlightsCloud(String data);
   void moodlights(int red, int green, int blue);
 
   void syncLights();   // Master command: Sync lights with slaves.
@@ -78,9 +77,8 @@ public:
   void startLeftButton();
   void startRightButton();
 
-  int moveNeckCloud(String data);
-  int moveRightCloud(String data);
-  int moveLeftCloud(String data);
+
+  int moveCloud(String data);
 
   float getTempC(int pin);
   int lightness();

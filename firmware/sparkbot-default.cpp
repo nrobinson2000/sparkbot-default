@@ -18,8 +18,6 @@ sparkbot::sparkbot()
 
   choice = 0; // Used for switching lights
 
-  onlineBots = 1;
-
   slaveMode = false;
 }
 
@@ -32,6 +30,7 @@ void sparkbot::begin()
   pinMode(RIGHTBUTTON, INPUT);  //We Enable the inputs.
   pinMode(LEFTBUTTON, INPUT);
   pinMode(PHOTORESISTOR, INPUT);
+  pinMode(MICROPHONE, INPUT);
 
   pinMode(REDLED, OUTPUT); //LEDs
   pinMode(BLUELED, OUTPUT);
@@ -39,7 +38,6 @@ void sparkbot::begin()
 
   pinMode(BUZZER, OUTPUT);
 
-  pinMode(MICROPHONE, INPUT);
 
   neckservo.write(90); // Reset servos and read the values.
   neckAngle = neckservo.read();
@@ -52,19 +50,15 @@ void sparkbot::begin()
   Spark.variable("rightArm", &rightArmAngle, INT);
   Spark.variable("leftArm", &leftArmAngle, INT);
   Spark.variable("brightness", &brightness, INT);
-
-  Spark.variable("onlineBots", &onlineBots, INT);
-
-  Spark.function("moveNeck", (int (*)(String))&sparkbot::moveNeckCloud);
-  Spark.function("moveRight", (int (*)(String))&sparkbot::moveRightCloud);
-  Spark.function("moveLeft", (int (*)(String))&sparkbot::moveLeftCloud);
+  Spark.function("moveServos", (int (*)(String))&sparkbot::moveCloud);
   Spark.function("moodlights", (int (*)(String))&sparkbot::moodlightsCloud);
   Spark.function("enableSlave", (int (*)(String))&sparkbot::slaveToggle);
 
   Spark.subscribe("syncServos", (EventHandler)&sparkbot::syncServosSlave, MY_DEVICES);
-  Spark.subscribe("RGB", (EventHandler)&sparkbot::RGBSlave, MY_DEVICES);  
+  Spark.subscribe("RGB", (EventHandler)&sparkbot::RGBSlave, MY_DEVICES);
 }
 
+Give me warnings
 
 void sparkbot::switchLights()
 {
@@ -120,8 +114,12 @@ void sparkbot::green() //This function turns on the green, and turns off the red
   greenValue = 255;
 }
 
-int sparkbot::moodlightsCloud(String red, String green, String blue)
+int sparkbot::moodlightsCloud(String data)
 {
+  String red = String(data.charAt(0) + data.charAt(1) + data.charAt(2));
+  String green = String(data.charAt(4) + data.charAt(5) + data.charAt(6));
+  String blue = String(data.charAt(8) + data.charAt(9) + data.charAt(10));
+
   analogWrite(REDLED, red.toInt());
   redValue = red.toInt();
   analogWrite(GREENLED, green.toInt());
@@ -302,21 +300,15 @@ void sparkbot::stopBuzzer()
   analogWrite(BUZZER, 0);
 }
 
-int sparkbot::moveNeckCloud(String data)
+int sparkbot::moveCloud(String data)
 {
-  sparkbot::moveNeck(data.toInt());
-  return 1;
-}
+  String neckvalue = String(data.charAt(0) + data.charAt(1) + data.charAt(2));
+  String rightvalue = String(data.charAt(4) + data.charAt(5) + data.charAt(6));
+  String leftvalue = String(data.charAt(8) + data.charAt(9) + data.charAt(10));
 
-int sparkbot::moveRightCloud(String data)
-{
-  sparkbot::moveRight(data.toInt());
-  return 1;
-}
-
-int sparkbot::moveLeftCloud(String data)
-{
-  sparkbot::moveLeft(data.toInt());
+  moveNeck(neckvalue.toInt());
+  moveRight(rightvalue.toInt());
+  moveLeft(leftvalue.toInt());
   return 1;
 }
 
@@ -334,6 +326,7 @@ int sparkbot::slaveToggle(String data)
     slaveMode = true;
     return 2;
   }
+  return -1;
 
 }
 
