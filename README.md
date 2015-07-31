@@ -11,7 +11,6 @@
     sb.begin(); // This initializes the SparkBot.
 
 #Additional processes:  
-    sb.initSlave(); // Configure this SparkBot as a slave bot.
 
     sb.sync(); // Master sync command.  Sync other slave bots to the settings of this SparkBot.
 
@@ -30,9 +29,7 @@
 
 #SparkBot cloud Functions:
 
-    "moveNeck", Calls moveNeckCloud(int), integer from 0-180
-    "moveRight", Calls moveRightCloud(int), integer from 0-180
-    "moveLeft", Calls moveLeftCloud(int), integer from 0-180
-    "moodlights", Calls moodlights(red, green, blue), 3 RGB values from 0-255
+    "moveServos", must be a string like this "NNN RRR LLL", writes values to the servos.
+    "moodlights", must be a string like this "RRR GGG BBB", writes values to the moodlights.
 
     "checkOnline", Calls the checkOnline function, which updates "onlineBots".
