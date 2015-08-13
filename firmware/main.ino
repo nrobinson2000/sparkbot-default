@@ -65,6 +65,7 @@ sb.begin();
 
 void loop() // Mandatory loop function.
 {
-sb.refresh(); // This function refreshes the arm variables and the brightness variable.
+
+// sb.refresh(); // This function refreshes the arm variables and the brightness variable.
 
 }
