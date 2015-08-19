@@ -1,4 +1,8 @@
+sudo: required
+
 install:
+  - sudo apt-get update
+  - sudo apt-get install expect
   - npm install -g particle-cli
 
 script:
