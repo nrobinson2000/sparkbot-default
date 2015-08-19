@@ -6,5 +6,6 @@ install:
   - npm install -g particle-cli
 
 script:
+  - export PARTICLE="$(which particle)"
   - chmod +x travis-helper.sh
   - ./travis-helper.sh
