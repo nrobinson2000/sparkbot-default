@@ -2,11 +2,11 @@
 #I hope this works!
 set timeout 20
 
-spawn "particle cloud login"
+spawn "/usr/bin/particle cloud login"
 expect "? Please enter your email address: "
 send $EMAIL
 
 expect "? Please enter your password: "
 send $PASS
 
-spawn "particle compile photon firmware/"
+spawn "/usr/bin/particle compile photon firmware/"
