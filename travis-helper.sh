@@ -2,7 +2,7 @@
 #I hope this works!
 set timeout 20
 
-spawn "/usr/bin/particle cloud login"
+spawn "$PARTICLE cloud login"
 expect "? Please enter your email address: "
 send $EMAIL
 
