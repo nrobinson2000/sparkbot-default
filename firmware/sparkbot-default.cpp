@@ -39,13 +39,14 @@ void sparkbot::begin()
 
   pinMode(BUZZER, OUTPUT);
 
-
+/*
   neckservo.write(90); // Reset servos and read the values.
   neckAngle = neckservo.read();
   rightservo.write(90);
   rightArmAngle = rightservo.read();
   leftservo.write(90);
   leftArmAngle = leftservo.read();
+  */
 
   Spark.variable("neck", &neckAngle, INT);
   Spark.variable("rightArm", &rightArmAngle, INT);
@@ -275,22 +276,25 @@ void sparkbot::sync()
   syncServos();
 }
 
-void sparkbot::moveNeck(int value)
+bool sparkbot::moveNeck(int value)
 {
   neckservo.write(value);
   neckAngle = neckservo.read();
+  return true;
 }
 
-void sparkbot::moveRight(int value)
+bool sparkbot::moveRight(int value)
 {
   rightservo.write(value);
   rightArmAngle = rightservo.read();
+  return true;
 }
 
-void sparkbot::moveLeft(int value)
+bool sparkbot::moveLeft(int value)
 {
   leftservo.write(value);
   leftArmAngle = leftservo.read();
+  return true;
 }
 
 void sparkbot::playBuzzer(int value)
@@ -309,9 +313,9 @@ int sparkbot::moveCloud(String data)
   String rightvalue = String(data.charAt(4) + data.charAt(5) + data.charAt(6));
   String leftvalue = String(data.charAt(8) + data.charAt(9) + data.charAt(10));
 
-  moveNeck(neckvalue.toInt());
-  moveRight(rightvalue.toInt());
-  moveLeft(leftvalue.toInt());
+  if (moveNeck(neckvalue.toInt()) == true);
+  if (moveRight(rightvalue.toInt()) == true);
+  if (moveLeft(leftvalue.toInt()) == true);
   return 1;
 }
 

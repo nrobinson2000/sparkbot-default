@@ -67,9 +67,9 @@ public:
   void syncServos();   // Master command: Sync servos with slaves.
   void sync();
 
-  void moveNeck(int value);
-  void moveRight(int value);
-  void moveLeft(int value);
+  bool moveNeck(int value);
+  bool moveRight(int value);
+  bool moveLeft(int value);
 
   void playBuzzer(int value);
   void stopBuzzer();
