@@ -4,8 +4,8 @@ install:
   - sudo apt-get update
   - sudo apt-get install expect
   - npm install -g particle-cli
+  - export PARTICLE="$(which particle)"
 
 script:
-  - export PARTICLE="$(which particle)"
   - chmod +x travis-helper.sh
   - ./travis-helper.sh
