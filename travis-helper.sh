@@ -1,12 +1,12 @@
 #!/usr/bin/expect
-#I hope this works!!!!
+#I hope this works!!!!!
 set timeout 20
 
-spawn "$(which particle) cloud login"
+spawn "particle cloud login"
 expect "? Please enter your email address: "
 send ${EMAIL}
 
 expect "? Please enter your password: "
 send ${PASS}
 
-spawn "$(which particle) compile photon firmware/"
+spawn "particle compile photon firmware/"
