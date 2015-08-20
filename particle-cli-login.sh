@@ -1,5 +1,5 @@
 #!/usr/bin/expect
-#I hope this works!!!!!!!
+
 set timeout 10
 
 set user [lindex $argv 0]
