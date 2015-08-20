@@ -6,7 +6,5 @@ install:
   - npm install -g particle-cli
 
 script:
-  - echo "$(which particle)"
-  - chmod +x travis-helper.sh
   - ./particle-cli-login.sh $email $pass
   - particle compile photon firmware/
