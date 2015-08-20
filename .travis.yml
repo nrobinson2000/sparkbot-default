@@ -8,5 +8,5 @@ install:
 script:
   - echo "$(which particle)"
   - chmod +x travis-helper.sh
-  - ./travis-helper.sh $email $pass
+  - ./particle-cli-login.sh $email $pass
   - particle compile photon firmware/
