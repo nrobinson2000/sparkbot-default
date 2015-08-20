@@ -1,6 +1,6 @@
 #!/usr/bin/expect
 #I hope this works!!!!!!!
-set timeout 20
+set timeout 10
 
 set user [lindex $argv 0]
 
@@ -13,4 +13,4 @@ send "$user\r"
 expect "? Please enter your password: "
 send "$password\r"
 
-spawn /home/travis/.nvm/v0.10.36/bin/particle compile photon firmware/
+interact
