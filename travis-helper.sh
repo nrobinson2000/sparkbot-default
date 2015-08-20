@@ -4,9 +4,9 @@ set timeout 20
 
 spawn /home/travis/.nvm/v0.10.36/bin/particle cloud login
 expect "? Please enter your email address: "
-send ${EMAIL}
+send $EMAIL
 
 expect "? Please enter your password: "
-send ${PASS}
+send $PASS
 
 spawn /home/travis/.nvm/v0.10.36/bin/particle compile photon firmware/
