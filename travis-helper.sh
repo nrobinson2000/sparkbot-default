@@ -1,5 +1,5 @@
 #!/usr/bin/expect
-#I hope this works!!!!!!
+#I hope this works!!!!!!!
 set timeout 20
 
 spawn /home/travis/.nvm/v0.10.36/bin/particle cloud login

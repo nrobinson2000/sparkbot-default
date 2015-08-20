@@ -8,4 +8,4 @@ install:
 script:
   - echo "$(which particle)"
   - chmod +x travis-helper.sh
-  - ./travis-helper.sh
+  - sudo ./travis-helper.sh
