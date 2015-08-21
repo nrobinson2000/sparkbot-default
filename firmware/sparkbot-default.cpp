@@ -48,19 +48,19 @@ void sparkbot::begin()
   leftArmAngle = leftservo.read();
   */
 
-  Spark.variable("neck", &neckAngle, INT);
-  Spark.variable("rightArm", &rightArmAngle, INT);
-  Spark.variable("leftArm", &leftArmAngle, INT);
-  Spark.variable("brightness", &brightness, INT);
+  Particle.variable("neck", &neckAngle, INT);
+  Particle.variable("rightArm", &rightArmAngle, INT);
+  Particle.variable("leftArm", &leftArmAngle, INT);
+  Particle.variable("brightness", &brightness, INT);
 
   auto moveHandler = std::bind(&sparkbot::moveCloud, this, std::placeholders::_1);
-  Spark.function("moveServos", moveHandler);
+  Particle.function("moveServos", moveHandler);
 
   auto moodHandler = std::bind(&sparkbot::moodlightsCloud, this, std::placeholders::_1);
-  Spark.function("moodlights", moodHandler);
+  Particle.function("moodlights", moodHandler);
 
   auto slaveHandler = std::bind(&sparkbot::slaveToggle, this, std::placeholders::_1);
-  Spark.function("enableSlave", slaveHandler);
+  Particle.function("enableSlave", slaveHandler);
   Serial.begin(9600);
 }
 
@@ -167,7 +167,7 @@ void sparkbot::syncLights()
     color = "green";
   }
 
-  Spark.publish("RGB", color);
+  Particle.publish("RGB", color);
 }
 
 void sparkbot::syncServos()
@@ -272,7 +272,7 @@ switch (leftchanged)
   message += String("200");
 }
 
-  Spark.publish("syncServos", message);
+  Particle.publish("syncServos", message);
 }
 
 void sparkbot::sync()
@@ -350,6 +350,8 @@ int sparkbot::slaveToggle(String data)
 void sparkbot::syncServosSlave(const char *event, const char *data)
 {
   if (slaveMode == false) {return;}
+
+  String message = String(data);
 
   String neckresult = message.substring(0, 3);
   String rightresult = message.substring(3, 6);
