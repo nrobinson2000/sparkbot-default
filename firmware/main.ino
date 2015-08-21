@@ -23,7 +23,6 @@ void setup() // Mandatory setup function.
 sb.begin();
  Spark.subscribe("syncServos", &syncServosHandler, MY_DEVICES);
  Spark.subscribe("RGB", &RGBSlaveHandler, MY_DEVICES);
- pinMode(A9, OUTPUT);
 
 
   // This initializes the SparkBot.
@@ -61,8 +60,6 @@ sb.begin();
 "checkOnline", Calls the checkOnline function, which updates "onlineBots".
 
 */
-
-analogWrite(A9, 200);
 }
 
 
@@ -70,6 +67,7 @@ void loop() // Mandatory loop function.
 {
 
   sb.refresh(); // This function refreshes the arm variables and the brightness variable.
+//  analogWrite(REDLED, 250);
   /*
   delay(1500);
   if (sb.moveNeck(0));

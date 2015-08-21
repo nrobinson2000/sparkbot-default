@@ -130,7 +130,7 @@ int sparkbot::moodlightsCloud(String data)
   greenValue = green.toInt();
   analogWrite(BLUELED, blue.toInt());
   blueValue = blue.toInt();
-  return 1;
+  return red.toInt();
 }
 
 void sparkbot::moodlights(int red, int green, int blue)
