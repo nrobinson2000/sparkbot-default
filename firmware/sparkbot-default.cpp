@@ -120,9 +120,9 @@ void sparkbot::green() //This function turns on the green, and turns off the red
 
 int sparkbot::moodlightsCloud(String data)
 {
-  String red = String(data.charAt(0) + data.charAt(1) + data.charAt(2));
-  String green = String(data.charAt(4) + data.charAt(5) + data.charAt(6));
-  String blue = String(data.charAt(8) + data.charAt(9) + data.charAt(10));
+  String red = data.substring(0, 3);
+  String green = data.substring(4, 7);
+  String blue = data.substring(8,11);
 
   analogWrite(REDLED, red.toInt());
   redValue = red.toInt();
@@ -130,7 +130,12 @@ int sparkbot::moodlightsCloud(String data)
   greenValue = green.toInt();
   analogWrite(BLUELED, blue.toInt());
   blueValue = blue.toInt();
-  return red.toInt();
+
+  Serial.println("Original String:" + data);
+  Serial.println("RED:" + String(red.toInt()));
+  Serial.println("GREEN:" + String(green.toInt()));
+  Serial.println("BLUE:" + String(blue.toInt()));
+  return 1;
 }
 
 void sparkbot::moodlights(int red, int green, int blue)
@@ -309,13 +314,18 @@ void sparkbot::stopBuzzer()
 
 int sparkbot::moveCloud(String data)
 {
-  String neckvalue = String(data.charAt(0) + data.charAt(1) + data.charAt(2));
-  String rightvalue = String(data.charAt(4) + data.charAt(5) + data.charAt(6));
-  String leftvalue = String(data.charAt(8) + data.charAt(9) + data.charAt(10));
+  String neckvalue = data.substring(0, 3);
+  String rightvalue = data.substring(4, 7);
+  String leftvalue = data.substring(8,11);
 
   if (moveNeck(neckvalue.toInt()) == true);
   if (moveRight(rightvalue.toInt()) == true);
   if (moveLeft(leftvalue.toInt()) == true);
+
+  Serial.println("Original String: " + data);
+  Serial.println("Neck: " + String(neckvalue.toInt()));
+  Serial.println("Right: " + String(rightvalue.toInt()));
+  Serial.println("Left: " + String(leftvalue.toInt()));
   return 1;
 }
 
@@ -341,10 +351,9 @@ void sparkbot::syncServosSlave(const char *event, const char *data)
 {
   if (slaveMode == false) {return;}
 
-  String message = String(data);
-  String neckresult = String(message.charAt(0) + message.charAt(1) + message.charAt(2));
-  String rightresult = String(message.charAt(3) + message.charAt(4) + message.charAt(5));
-  String leftresult = String(message.charAt(6) + message.charAt(7) + message.charAt(8));
+  String neckresult = message.substring(0, 3);
+  String rightresult = message.substring(3, 6);
+  String leftresult = message.substring(6,9);
 
   bool moveNeck = false;
   bool moveRight = false;
