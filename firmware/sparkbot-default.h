@@ -18,12 +18,12 @@ public:
   #define LEFTBUTTON D6           //
                                   //
   #define REDLED D3               //
-  #define BLUELED A5              //
+  #define BLUELED TX              //
   #define GREENLED A7             //
                                   //
   #define PHOTORESISTOR A0        //
   #define MICROPHONE A3           //
-  #define BUZZER A4               //
+  #define BUZZER RX               //
                                   //
   #define I0 A6                   //
   #define I1 A1                   //
