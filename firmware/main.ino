@@ -65,7 +65,7 @@ sb.begin();
 
 void loop() // Mandatory loop function.
 {
-
+// sb.playBuzzer(100);
   sb.refresh(); // This function refreshes the arm variables and the brightness variable.
 //  analogWrite(REDLED, 250);
   /*

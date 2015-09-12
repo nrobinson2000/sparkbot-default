@@ -318,9 +318,18 @@ int sparkbot::moveCloud(String data)
   String rightvalue = data.substring(4, 7);
   String leftvalue = data.substring(8,11);
 
-  if (moveNeck(neckvalue.toInt()) == true);
-  if (moveRight(rightvalue.toInt()) == true);
-  if (moveLeft(leftvalue.toInt()) == true);
+  if (neckvalue.toInt() != 200)
+  {
+    if (moveNeck(neckvalue.toInt()) == true);
+  }
+  if (rightvalue.toInt() != 200)
+  {
+    if (moveRight(rightvalue.toInt()) == true);
+  }
+  if (leftvalue.toInt() != 200)
+  {
+    if (moveLeft(leftvalue.toInt()) == true);
+  }
 
   Serial.println("Original String: " + data);
   Serial.println("Neck: " + String(neckvalue.toInt()));
