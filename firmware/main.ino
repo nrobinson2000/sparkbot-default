@@ -17,10 +17,15 @@ void RGBSlaveHandler(const char *event, const char *data)
 sb.RGBSlave(event, data);
 }
 
+void wemoHandler()
+{
+  Particle.publish("wemo");
+}
 
 void setup() // Mandatory setup function.
 {
 sb.begin();
+interrupts();
  Spark.subscribe("syncServos", &syncServosHandler, MY_DEVICES);
  Spark.subscribe("RGB", &RGBSlaveHandler, MY_DEVICES);
 
@@ -65,6 +70,12 @@ sb.begin();
 
 void loop() // Mandatory loop function.
 {
+  if (digitalRead(I4) == HIGH)
+  {
+      wemoHandler();
+      delay(250);
+
+  }
 // sb.playBuzzer(100);
   sb.refresh(); // This function refreshes the arm variables and the brightness variable.
 //  analogWrite(REDLED, 250);
