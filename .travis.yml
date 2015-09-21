@@ -2,7 +2,8 @@ sudo: required
 
 install:
   - sudo apt-get update
-  - sudo apt-get install expect figlet ruby-trollop ruby-paint
+  - sudo apt-get install expect figlet
+  - sudo gem install trollop ruby-paint
   - wget http://launchpadlibrarian.net/137808115/lolcat_42.0.99-1_all.deb
   - sudo dpkg --install lolcat_42.0.99-1_all.deb
   - npm install -g particle-cli
