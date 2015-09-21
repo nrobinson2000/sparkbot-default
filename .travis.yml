@@ -4,7 +4,7 @@ install:
   - sudo apt-get update
   - sudo apt-get install expect figlet
   - gem install trollop
-  - gem install ruby-paint
+  - gem install paint
   - wget http://launchpadlibrarian.net/137808115/lolcat_42.0.99-1_all.deb
   - sudo dpkg --install lolcat_42.0.99-1_all.deb
   - npm install -g particle-cli
