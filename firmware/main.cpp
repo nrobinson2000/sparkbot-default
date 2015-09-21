@@ -1,8 +1,8 @@
-// main.ino  This is the barebones required code to use the SparkBot library in a sketch.
+// main.cpp  This is the barebones required code to use the SparkBot library in a sketch.
 // This is a reference document, as it is heavily commented.  Obviously anything commented
 // here is not essential for a barebones sketch.
 // Written by Nathan Robinson under GPL 3.0
-
+#include "application.h"
 #include "sparkbot-default.h" // Import the sparkbot-default library.
 
 sparkbot sb; // Create sb, an object of the sparkbot class.
@@ -19,7 +19,7 @@ sb.RGBSlave(event, data);
 
 void wemoHandler()
 {
-  Particle.publish("wemo");
+  Particle.publish("toggleWemo", PRIVATE);
 }
 
 void setup() // Mandatory setup function.
