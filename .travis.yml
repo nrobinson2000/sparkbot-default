@@ -6,7 +6,7 @@ install:
   - gem install trollop
   - gem install paint
   - wget http://launchpadlibrarian.net/137808115/lolcat_42.0.99-1_all.deb
-  - sudo dpkg --install lolcat_42.0.99-1_all.deb
+  - dpkg --install lolcat_42.0.99-1_all.deb
   - npm install -g particle-cli
 
 script:
