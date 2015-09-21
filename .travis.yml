@@ -9,9 +9,9 @@ script:
   - particle compile photon firmware/
   
 after_success:
-  - curl -X POST -H "Content-Type:\ application/json" -d '{"value1":"was successful"}' "https://maker.ifttt.com/trigger/pushbullet/with/key/$ifttt"
+  - curl -X POST -H "Content-Type:\ application/json" -d '{"value1":\"was successful"}' "https://maker.ifttt.com/trigger/pushbullet/with/key/$ifttt"
   - figlet "It worked!"
   
 after_failure:
-  - curl -X POST -H "Content-Type:\ application/json" -d '{"value1":"failed"}' "https://maker.ifttt.com/trigger/pushbullet/with/key/$ifttt"
+  - curl -X POST -H "Content-Type:\ application/json" -d '{"value1":\"failed"}' "https://maker.ifttt.com/trigger/pushbullet/with/key/$ifttt"
   - figlet "Failed!"
