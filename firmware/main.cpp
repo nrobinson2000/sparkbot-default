@@ -17,9 +17,10 @@ void RGBSlaveHandler(const char *event, const char *data)
 sb.RGBSlave(event, data);
 }
 
-void wemoHandler()
+void webhookHandler()
 {
-  Particle.publish("toggleWemo", PRIVATE);
+  // Particle.publish("ATC-Bot", "Hello", PRIVATE);
+  Particle.publish("toggleWemo");
 }
 
 void setup() // Mandatory setup function.
@@ -72,7 +73,7 @@ void loop() // Mandatory loop function.
 {
   if (digitalRead(I4) == HIGH)
   {
-      wemoHandler();
+      webhookHandler();
       delay(250);
 
   }
