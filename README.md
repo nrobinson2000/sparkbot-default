@@ -1,10 +1,10 @@
 [![Build Status](https://travis-ci.org/nrobinson2000/sparkbot-default.svg?branch=master)](https://travis-ci.org/nrobinson2000/sparkbot-default)
 #sparkbot-default
 
-###About:
+##About:
 * This is the default library for the SparkBot by Nathan Robinson.  This library contains all of the necessary functions and variables to make using SparkBot easier.
 
-##USAGE:
+## Basic Usage:
     #include "sparkbot-default.h" // Import the sparkbot-default library.
 
     sparkbot sb; // Create sb, an object of the sparkbot class.
