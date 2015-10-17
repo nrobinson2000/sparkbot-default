@@ -18,8 +18,8 @@ public:
   #define LEFTBUTTON D6           //
                                   //
   #define REDLED D3               //
-  #define BLUELED TX              //
-  #define GREENLED A7             //
+  #define BLUELED A7              //
+  #define GREENLED TX             //
                                   //
   #define PHOTORESISTOR A0        //
   #define MICROPHONE A3           //
@@ -69,9 +69,9 @@ public:
   void syncServos();   // Master command: Sync servos with slaves.
   void sync();
 
-  bool moveNeck(int value);
-  bool moveRight(int value);
-  bool moveLeft(int value);
+  void moveNeck(int value);
+  void moveRight(int value);
+  void moveLeft(int value);
 
   void playBuzzer(int value);
   void stopBuzzer();

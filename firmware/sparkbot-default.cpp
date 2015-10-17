@@ -281,25 +281,28 @@ void sparkbot::sync()
   syncServos();
 }
 
-bool sparkbot::moveNeck(int value)
+void sparkbot::moveNeck(int value)
 {
+
   neckservo.write(value);
+  delay(50);
   neckAngle = neckservo.read();
-  return true;
 }
 
-bool sparkbot::moveRight(int value)
+void sparkbot::moveRight(int value)
 {
+
   rightservo.write(value);
+  delay(50);
   rightArmAngle = rightservo.read();
-  return true;
 }
 
-bool sparkbot::moveLeft(int value)
+void sparkbot::moveLeft(int value)
 {
+
   leftservo.write(value);
+  delay(50);
   leftArmAngle = leftservo.read();
-  return true;
 }
 
 void sparkbot::playBuzzer(int value)
@@ -320,15 +323,15 @@ int sparkbot::moveCloud(String data)
 
   if (neckvalue.toInt() != 200)
   {
-    if (moveNeck(neckvalue.toInt()) == true);
+    moveNeck(neckvalue.toInt());
   }
   if (rightvalue.toInt() != 200)
   {
-    if (moveRight(rightvalue.toInt()) == true);
+    moveRight(rightvalue.toInt());
   }
   if (leftvalue.toInt() != 200)
   {
-    if (moveLeft(leftvalue.toInt()) == true);
+    moveLeft(leftvalue.toInt());
   }
 
   Serial.println("Original String: " + data);

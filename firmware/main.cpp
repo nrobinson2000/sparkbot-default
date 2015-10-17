@@ -66,6 +66,9 @@ interrupts();
 "checkOnline", Calls the checkOnline function, which updates "onlineBots".
 
 */
+sb.moveNeck(90);
+sb.moveLeft(90);
+sb.moveRight(90);
 }
 
 
