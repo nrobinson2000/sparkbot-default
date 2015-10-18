@@ -24,9 +24,9 @@ sparkbot::sparkbot()
 
 void sparkbot::begin()
 {
-  rightservo.attach(RIGHTSERVO); //Here we attach the three servos
-  leftservo.attach(LEFTSERVO);
   neckservo.attach(NECKSERVO);
+  leftservo.attach(LEFTSERVO);
+  rightservo.attach(RIGHTSERVO); //Here we attach the three servos
 
   pinMode(RIGHTBUTTON, INPUT);  //We Enable the inputs.
   pinMode(LEFTBUTTON, INPUT);
@@ -283,26 +283,20 @@ void sparkbot::sync()
 
 void sparkbot::moveNeck(int value)
 {
-
   neckservo.write(value);
-  delay(50);
-  neckAngle = neckservo.read();
+  delay(15);
 }
 
 void sparkbot::moveRight(int value)
 {
-
   rightservo.write(value);
-  delay(50);
-  rightArmAngle = rightservo.read();
+  delay(15);
 }
 
 void sparkbot::moveLeft(int value)
 {
-
   leftservo.write(value);
-  delay(50);
-  leftArmAngle = leftservo.read();
+  delay(15);
 }
 
 void sparkbot::playBuzzer(int value)
@@ -456,5 +450,8 @@ void sparkbot::refresh()
   neckAngle = neckservo.read();
   rightArmAngle = rightservo.read();
   leftArmAngle = leftservo.read();
+  neckservo.refresh();
+  leftservo.refresh();
+  rightservo.refresh();
 
 }
