@@ -450,8 +450,5 @@ void sparkbot::refresh()
   neckAngle = neckservo.read();
   rightArmAngle = rightservo.read();
   leftArmAngle = leftservo.read();
-  neckservo.refresh();
-  leftservo.refresh();
-  rightservo.refresh();
 
 }

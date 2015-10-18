@@ -27,8 +27,8 @@ void setup() // Mandatory setup function.
 {
 sb.begin();
 interrupts();
- Spark.subscribe("syncServos", &syncServosHandler, MY_DEVICES);
- Spark.subscribe("RGB", &RGBSlaveHandler, MY_DEVICES);
+ Particle.subscribe("syncServos", &syncServosHandler, MY_DEVICES);
+ Particle.subscribe("RGB", &RGBSlaveHandler, MY_DEVICES);
 
 
   // This initializes the SparkBot.
