@@ -4,6 +4,7 @@
 // Written by Nathan Robinson under GPL 3.0
 #include "application.h"
 #include "sparkbot-default.h" // Import the sparkbot-default library.
+SYSTEM_THREAD(ENABLED);
 
 sparkbot sb; // Create sb, an object of the sparkbot class.
 
