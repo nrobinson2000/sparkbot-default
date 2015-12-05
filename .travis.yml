@@ -1,17 +1,18 @@
 sudo: required
 
 install:
-  - sudo apt-get install expect figlet
+  - sudo apt-get update
+  - sudo apt-get install expect
   - npm install -g particle-cli
 
 script:
   - ./particle-cli-login.sh $email $pass
   - particle compile photon firmware/
-  
+
 after_success:
   - curl -X POST https://maker.ifttt.com/trigger/pushbullet/with/key/$ifttt
   - figlet "It worked!"
-  
+
 after_failure:
   - curl -X POST https://maker.ifttt.com/trigger/pushbullet2/with/key/$ifttt
   - figlet "Failed!"
