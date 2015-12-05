@@ -24,9 +24,9 @@ public:
   #define PHOTORESISTOR A0        //
   #define MICROPHONE A3           //
   #define BUZZER RX               //
-
-  #define I0 A5
-  #define I1 A4                               //
+                                  //
+  #define I0 A5                   //
+  #define I1 A4                   //
   #define I2 A6                   //
   #define I3 A1                   //
   #define I4 A2                   //
@@ -49,8 +49,8 @@ public:
   int greenValue;                 //
   int blueValue;                  //
                                   //
-  int choice;
-  int noiseLevel;
+  int choice;                     //
+  int noiseLevel;           //</variables>
 
 
   bool slaveMode;
