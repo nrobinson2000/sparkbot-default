@@ -70,19 +70,31 @@ interrupts();
 sb.moveNeck(90);
 sb.moveLeft(90);
 sb.moveRight(90);
+pinMode(I0, OUTPUT);
+pinMode(I4, INPUT);
 }
 
 
 void loop() // Mandatory loop function.
 {
+
+  sb.refresh();
   if (digitalRead(I4) == HIGH)
   {
+      Serial.println("Button pressed!");
       webhookHandler();
       delay(250);
+  }
 
+  if (sb.noiseLevel > 700)
+  {
+    Serial.println("NOISE!");
+    digitalWrite(I0, HIGH);
+    delay(100);
+    digitalWrite(I0, LOW);;
   }
 // sb.playBuzzer(100);
-  sb.refresh(); // This function refreshes the arm variables and the brightness variable.
+
 //  analogWrite(REDLED, 250);
   /*
   delay(1500);

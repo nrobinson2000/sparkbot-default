@@ -52,6 +52,7 @@ void sparkbot::begin()
   Particle.variable("rightArm", &rightArmAngle, INT);
   Particle.variable("leftArm", &leftArmAngle, INT);
   Particle.variable("brightness", &brightness, INT);
+  Particle.variable("noise", &noiseLevel, INT);
 
   auto moveHandler = std::bind(&sparkbot::moveCloud, this, std::placeholders::_1);
   Particle.function("moveServos", moveHandler);
@@ -444,13 +445,13 @@ int sparkbot::lightness()
   return analogRead(PHOTORESISTOR);
 }
 
+int sparkbot::getNoiseLevel()
+{
+  return analogRead(MICROPHONE) / 4;
+}
 void sparkbot::refresh()
 {
   brightness = lightness();
-  /*
-  neckAngle = neckservo.read();
-  rightArmAngle = rightservo.read();
-  leftArmAngle = leftservo.read();
-  */
+  noiseLevel = getNoiseLevel();
 
 }

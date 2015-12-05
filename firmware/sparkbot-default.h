@@ -50,6 +50,7 @@ public:
   int blueValue;                  //
                                   //
   int choice;
+  int noiseLevel;
 
 
   bool slaveMode;
@@ -89,6 +90,7 @@ public:
 
   float getTempC(int pin);
   int lightness();
+  int getNoiseLevel();
   void refresh();
 };
 #endif
