@@ -6,6 +6,6 @@
 
 **firmware/photon/
 
-**firmware/target
+**firmware/target/*
 
 compile.sh
