@@ -5,3 +5,7 @@
 **webhooks/
 
 **firmware/photon/
+
+**firmware/target
+
+compile.sh
