@@ -86,7 +86,7 @@ void loop() // Mandatory loop function.
       delay(250);
   }
 
-  if (sb.noiseLevel > 700)
+  if (sb.noiseLevel > 750)
   {
     Serial.println("NOISE!");
     digitalWrite(I0, HIGH);
