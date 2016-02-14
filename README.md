@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/nrobinson2000/sparkbot-default.svg?branch=master)](https://travis-ci.org/nrobinson2000/sparkbot-default)
+[![Join the chat at https://gitter.im/nrobinson2000/sparkbot-default](https://badges.gitter.im/nrobinson2000/sparkbot-default.svg)](https://gitter.im/nrobinson2000/sparkbot-default?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 #sparkbot-default
 
 ##About:

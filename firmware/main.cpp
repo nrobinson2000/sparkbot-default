@@ -80,6 +80,7 @@ Serial1.println("Hello");
 void loop() // Mandatory loop function.
 {
   sb.refresh();
+<<<<<<< HEAD
 
   if (digitalRead(I4) == HIGH)
   {
@@ -97,6 +98,23 @@ void loop() // Mandatory loop function.
   }*/
 
   Serial.println(sb.noiseLevel);
+=======
+  Serial.println(sb.noiseLevel);
+  // if (digitalRead(I4) == HIGH)
+  // {
+  //     Serial.println("Button pressed!");
+  //     webhookHandler();
+  //     delay(250);
+  // }
+
+  // if (sb.noiseLevel > 750)
+  // {
+  //   Serial.println("NOISE!");
+  //   digitalWrite(I0, HIGH);
+  //   delay(100);
+  //   digitalWrite(I0, LOW);;
+  // }
+>>>>>>> e500c2e8af9620ef2ddc485be55c62b7479986cd
 // sb.playBuzzer(100);
 
 //  analogWrite(REDLED, 250);
