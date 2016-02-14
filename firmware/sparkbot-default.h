@@ -17,26 +17,26 @@ public:
   #define RIGHTBUTTON D7    //<photon pins>
   #define LEFTBUTTON D6           //
                                   //
-  #define REDLED D3               //
-  #define BLUELED A7              //
-  #define GREENLED TX             //
+  // #define REDLED D3               //
+  // #define BLUELED A7              //
+  // #define GREENLED TX             //
                                   //
   #define PHOTORESISTOR A0        //
   #define MICROPHONE A3           //
-  #define BUZZER RX               //
+  #define BUZZER D0               //
                                   //
-  #define I0 A5                   //
-  #define I1 A4                   //
+  #define I0 A4                   //
+  #define I1 A5                   //
   #define I2 A6                   //
   #define I3 A1                   //
   #define I4 A2                   //
   #define I5 D5                   //
   #define I6 D4                   //
                                   //
-                                  //
-  #define RIGHTSERVO D0           //
-  #define LEFTSERVO D1            //
-  #define NECKSERVO D2      //</photon pins>
+  //                                 //
+  // #define RIGHTSERVO D0           //
+  // #define LEFTSERVO D1            //
+  // #define NECKSERVO D2      //</photon pins>
 
 
   int neckAngle;            //<variables>
@@ -63,6 +63,7 @@ public:
   void red();          // Turn the lights red
   void blue();         // Turn the lights blue
   void green();        // Turn the lights green
+  void off();
   int moodlightsCloud(String data);
   void moodlights(int red, int green, int blue);
 
@@ -70,6 +71,7 @@ public:
   void syncServos();   // Master command: Sync servos with slaves.
   void sync();
 
+  String makeProper(int value);
   void moveNeck(int value);
   void moveRight(int value);
   void moveLeft(int value);
@@ -92,5 +94,11 @@ public:
   int lightness();
   int getNoiseLevel();
   void refresh();
+
+  void command(const char *data);
+  String readData();
+  String askNeck();
+  String askLeft();
+  String askRight();
 };
 #endif

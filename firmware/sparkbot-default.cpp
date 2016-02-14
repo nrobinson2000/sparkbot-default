@@ -1,11 +1,6 @@
 #include "sparkbot-default.h"
 #include "application.h"
 
-Servo rightservo;
-Servo leftservo;
-Servo neckservo;
-
-
 sparkbot::sparkbot()
 {
   // 3 Servo angles
@@ -24,19 +19,10 @@ sparkbot::sparkbot()
 
 void sparkbot::begin()
 {
-  neckservo.attach(NECKSERVO);
-  leftservo.attach(LEFTSERVO);
-  rightservo.attach(RIGHTSERVO); //Here we attach the three servos
-
   pinMode(RIGHTBUTTON, INPUT);  //We Enable the inputs.
   pinMode(LEFTBUTTON, INPUT);
   pinMode(PHOTORESISTOR, INPUT);
   pinMode(MICROPHONE, INPUT);
-
-  pinMode(REDLED, OUTPUT); //LEDs
-  pinMode(BLUELED, OUTPUT);
-  pinMode(GREENLED, OUTPUT);
-
   pinMode(BUZZER, OUTPUT);
 
 /*
@@ -63,6 +49,7 @@ void sparkbot::begin()
   auto slaveHandler = std::bind(&sparkbot::slaveToggle, this, std::placeholders::_1);
   Particle.function("enableSlave", slaveHandler);
   Serial.begin(9600);
+  Serial1.begin(9600);
 }
 
 void sparkbot::switchLights()
@@ -91,45 +78,45 @@ void sparkbot::switchLights()
 
 void sparkbot::red() //This function turns on the red, and turns off the blue and green
 {
-  analogWrite(REDLED, 255);
+  command("rgb 255 000 000");
   redValue = 255;
-  analogWrite(BLUELED, 0);
-  blueValue = 0;
-  analogWrite(GREENLED, 0);
   greenValue = 0;
+  blueValue = 0;
 }
 
 void sparkbot::blue() //This function turns on the blue, and turns off the red and green
 {
-  analogWrite(REDLED, 0);
+  command("rgb 000 000 255");
   redValue = 0;
-  analogWrite(BLUELED, 255);
-  blueValue = 0;
-  analogWrite(GREENLED, 0);
   greenValue = 0;
+  blueValue = 255;
 }
 
 void sparkbot::green() //This function turns on the green, and turns off the red and blue
 {
-  analogWrite(REDLED, 0);
-  redValue = 0;
-  analogWrite(BLUELED, 0);
-  blueValue = 0;
-  analogWrite(GREENLED, 255);
+  command("rgb 000 255 000");
+  redValue = 000;
   greenValue = 255;
+  blueValue = 0;
+}
+
+void sparkbot::off()
+{
+  command("rgb 000 000 000");
+  redValue = 0;
+  greenValue = 0;
+  blueValue = 0;
 }
 
 int sparkbot::moodlightsCloud(String data)
 {
+  command("rgb " + data);
   String red = data.substring(0, 3);
   String green = data.substring(4, 7);
   String blue = data.substring(8,11);
 
-  analogWrite(REDLED, red.toInt());
   redValue = red.toInt();
-  analogWrite(GREENLED, green.toInt());
   greenValue = green.toInt();
-  analogWrite(BLUELED, blue.toInt());
   blueValue = blue.toInt();
 
   Serial.println("Original String:" + data);
@@ -141,33 +128,20 @@ int sparkbot::moodlightsCloud(String data)
 
 void sparkbot::moodlights(int red, int green, int blue)
 {
-  analogWrite(REDLED, red);
+  command("rgb " + String(red) + " " + String(green) + " " + String(blue));
   redValue = red;
-  analogWrite(GREENLED, green);
   greenValue = green;
-  analogWrite(BLUELED, blue);
   blueValue = blue;
 }
 
-
 void sparkbot::syncLights()
 {
-  const char *color = "";
-  if (redValue == 255)
-  {
-    color = "red";
-  }
-
-  if (blueValue == 255)
-  {
-    color = "blue";
-  }
-
-  if (greenValue == 255)
-  {
-    color = "green";
-  }
-
+  String color;
+  color.concat(makeProper(redValue));
+  color.concat(" ");
+  color.concat(makeProper(greenValue));
+  color.concat(" ");
+  color.concat(makeProper(blueValue));
   Particle.publish("RGB", color);
 }
 
@@ -178,9 +152,13 @@ void sparkbot::syncServos()
   String rightdata = String("");
   String leftdata = String("");
 
-  int neck = neckservo.read();
-  int right = rightservo.read();
-  int left = leftservo.read();
+  String neckString = askNeck();
+  String rightString = askRight();
+  String leftString = askLeft();
+
+  int neck = neckString.toInt();
+  int right = rightString.toInt();
+  int left = leftString.toInt();
 
   bool neckchanged = false;
   bool rightchanged = false;
@@ -190,56 +168,21 @@ void sparkbot::syncServos()
   {
     neckAngle = neck;
     neckchanged = true;
-    if (neck < 100 && neck > 9)
-    {
-      neckdata = String("0" + String(neck));
-    }
-    if (neck < 10)
-    {
-      neckdata = String("00" +String(neck));
-    }
-    else
-    {
-      neckdata = String(neck);
-    }
+    neckdata = makeProper(neck);
   }
 
   if (rightArmAngle != right)
   {
     rightArmAngle = right;
     rightchanged = true;
-
-    if (right < 100 && right > 9)
-    {
-      rightdata = String("0" + String(right));
-    }
-    if (right < 10)
-    {
-      rightdata = String("00" +String(right));
-    }
-    else
-    {
-      rightdata = String(right);
-    }
+    rightdata = makeProper(right);
   }
 
   if (leftArmAngle != left)
   {
     leftArmAngle = left;
     leftchanged = true;
-
-    if (left < 100 && left > 9)
-    {
-      leftdata = String("0" + String(left));
-    }
-    if (left < 10)
-    {
-      leftdata = String("00" +String(left));
-    }
-    else
-    {
-      leftdata = String(left);
-    }
+    leftdata = makeProper(left);
   }
 
 switch (neckchanged)
@@ -282,22 +225,54 @@ void sparkbot::sync()
   syncServos();
 }
 
+String sparkbot::makeProper(int value)
+{
+  String valuedata;
+  if (value < 100 && value > 9)
+  {
+    valuedata = String("0" + String(value));
+  }
+  if (value < 10)
+  {
+    valuedata = String("00" +String(value));
+  }
+  else
+  {
+    valuedata = String(value);
+  }
+
+  return valuedata;
+}
+
 void sparkbot::moveNeck(int value)
 {
-  neckservo.write(value);
-  delay(15);
+  String valuedata = makeProper(value);
+
+  String message = String("servo ");
+  message.concat(valuedata);
+  message.concat(" 200 200");
+  command(message);
 }
 
 void sparkbot::moveRight(int value)
 {
-  rightservo.write(value);
-  delay(15);
+  String valuedata = makeProper(value);
+
+  String message = String("servo ");
+  message.concat("200 200 ");
+  message.concat(valuedata);
+  command(message);
 }
 
 void sparkbot::moveLeft(int value)
 {
-  leftservo.write(value);
-  delay(15);
+  String valuedata = makeProper(value);
+
+  String message = String("servo ");
+  message.concat("200 ");
+  message.concat(valuedata);
+  message.concat(" 200");
+  command(message);
 }
 
 void sparkbot::playBuzzer(int value)
@@ -403,21 +378,7 @@ void sparkbot::syncServosSlave(const char *event, const char *data)
 void sparkbot::RGBSlave(const char *event, const char *data)
 {
   if (slaveMode == false) {return;}
-
-  if (strcmp(data, "red") == 0)
-  {
-    red();
-  }
-
-  if (strcmp(data, "blue") == 0)
-  {
-    blue();
-  }
-
-  if (strcmp(data, "green") == 0)
-  {
-    green();
-  }
+  moodlightsCloud(data);
 }
 
 void sparkbot::startLeftButton()
@@ -449,9 +410,51 @@ int sparkbot::getNoiseLevel()
 {
   return analogRead(MICROPHONE) / 4;
 }
+
 void sparkbot::refresh()
 {
   brightness = lightness();
   noiseLevel = getNoiseLevel();
+}
 
+void sparkbot::command(const char *data)
+{
+  Serial1.println(data);
+}
+
+String sparkbot::readData()
+{
+  String readString;
+
+  while (Serial1.available())
+  {
+    delay(3);
+    char c = Serial1.read();
+    readString += c;
+  }
+
+  readString.trim();
+
+  if (readString.length() >0)
+  {
+    return readString;
+  }
+}
+
+String sparkbot::askNeck()
+{
+command("neck");
+return readData();
+}
+
+String sparkbot::askLeft()
+{
+command("left");
+return readData();
+}
+
+String sparkbot::askRight()
+{
+  command("right");
+  return readData();
 }
