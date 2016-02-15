@@ -5,6 +5,8 @@
 #include "application.h"
 #include "sparkbot-default.h" // Import the sparkbot-default library.
 SYSTEM_THREAD(ENABLED);
+SYSTEM_MODE(SEMI_AUTOMATIC);
+
 
 sparkbot sb; // Create sb, an object of the sparkbot class.
 
@@ -21,15 +23,16 @@ sb.RGBSlave(event, data);
 void webhookHandler()
 {
   // Particle.publish("ATC-Bot", "Hello", PRIVATE);
-  Particle.publish("toggleWemo");
+  // Particle.publish("toggleWemo");
 }
 
 void setup() // Mandatory setup function.
 {
-sb.begin();
-interrupts();
- Particle.subscribe("syncServos", &syncServosHandler, MY_DEVICES);
- Particle.subscribe("RGB", &RGBSlaveHandler, MY_DEVICES);
+  Particle.connect();
+  sb.begin();
+  interrupts();
+  Particle.subscribe("syncServos", &syncServosHandler, MY_DEVICES);
+  Particle.subscribe("RGB", &RGBSlaveHandler, MY_DEVICES);
 
 
   // This initializes the SparkBot.
@@ -67,13 +70,13 @@ interrupts();
 "checkOnline", Calls the checkOnline function, which updates "onlineBots".
 
 */
-sb.moveNeck(90);
-sb.moveLeft(90);
-sb.moveRight(90);
-pinMode(I0, OUTPUT);
-pinMode(I4, INPUT);
+  sb.moveNeck(90);
+  sb.moveLeft(90);
+  sb.moveRight(90);
+  pinMode(I0, OUTPUT);
+  pinMode(I4, INPUT);
 
-Serial1.println("Hello");
+  Serial1.println("Hello");
 }
 
 
