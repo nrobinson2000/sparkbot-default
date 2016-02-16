@@ -79,5 +79,5 @@ void setup() // Mandatory setup function.
 
 void loop() // Mandatory loop function.
 {
-  sb.refresh();  
+  sb.refresh();
 }
