@@ -5,8 +5,8 @@ sparkbot::sparkbot()
 {
   // 3 Servo angles
   neckAngle = 0;
-  rightArmAngle = 0;
   leftArmAngle = 0;
+  rightArmAngle = 0;
 
   redValue = 0;
   greenValue = 0;
@@ -84,20 +84,20 @@ void sparkbot::red() //This function turns on the red, and turns off the blue an
   blueValue = 0;
 }
 
-void sparkbot::blue() //This function turns on the blue, and turns off the red and green
-{
-  command("rgb 000 000 255");
-  redValue = 0;
-  greenValue = 0;
-  blueValue = 255;
-}
-
 void sparkbot::green() //This function turns on the green, and turns off the red and blue
 {
   command("rgb 000 255 000");
   redValue = 000;
   greenValue = 255;
   blueValue = 0;
+}
+
+void sparkbot::blue() //This function turns on the blue, and turns off the red and green
+{
+  command("rgb 000 000 255");
+  redValue = 0;
+  greenValue = 0;
+  blueValue = 255;
 }
 
 void sparkbot::off()
@@ -149,33 +149,26 @@ void sparkbot::syncServos()
 {
   String message = String("");
   String neckdata = String("");
-  String rightdata = String("");
   String leftdata = String("");
+  String rightdata = String("");
 
   String neckString = askNeck();
-  String rightString = askRight();
   String leftString = askLeft();
+  String rightString = askRight();
 
   int neck = neckString.toInt();
-  int right = rightString.toInt();
   int left = leftString.toInt();
+  int right = rightString.toInt();
 
   bool neckchanged = false;
-  bool rightchanged = false;
   bool leftchanged = false;
+  bool rightchanged = false;
 
   if (neckAngle != neck)
   {
     neckAngle = neck;
     neckchanged = true;
     neckdata = makeProper(neck);
-  }
-
-  if (rightArmAngle != right)
-  {
-    rightArmAngle = right;
-    rightchanged = true;
-    rightdata = makeProper(right);
   }
 
   if (leftArmAngle != left)
@@ -185,10 +178,27 @@ void sparkbot::syncServos()
     leftdata = makeProper(left);
   }
 
+  if (rightArmAngle != right)
+  {
+    rightArmAngle = right;
+    rightchanged = true;
+    rightdata = makeProper(right);
+  }
+
 switch (neckchanged)
 {
   case true:
   message += neckdata;
+  break;
+
+  case false:
+  message += String("200");
+}
+
+switch (leftchanged)
+{
+  case true:
+  message += leftdata;
   break;
 
   case false:
@@ -204,16 +214,6 @@ switch (rightchanged)
   case false:
   message += String("200");
   break;
-}
-
-switch (leftchanged)
-{
-  case true:
-  message += leftdata;
-  break;
-
-  case false:
-  message += String("200");
 }
 
   Particle.publish("syncServos", message);
@@ -248,31 +248,30 @@ void sparkbot::moveNeck(int value)
 {
   String valuedata = makeProper(value);
 
-  String message = String("servo ");
-  message.concat(valuedata);
-  message.concat(" 200 200");
-  command(message);
-}
-
-void sparkbot::moveRight(int value)
-{
-  String valuedata = makeProper(value);
-
-  String message = String("servo ");
-  message.concat("200 200 ");
+  String message = String("moveNeck ");
   message.concat(valuedata);
   command(message);
+  delay(50);
 }
 
 void sparkbot::moveLeft(int value)
 {
   String valuedata = makeProper(value);
 
-  String message = String("servo ");
-  message.concat("200 ");
+  String message = String("moveLeft ");
   message.concat(valuedata);
-  message.concat(" 200");
   command(message);
+  delay(50);
+}
+
+void sparkbot::moveRight(int value)
+{
+  String valuedata = makeProper(value);
+
+  String message = String("moveRight ");
+  message.concat(valuedata);
+  command(message);
+  delay(50);
 }
 
 void sparkbot::playBuzzer(int value)
@@ -288,26 +287,28 @@ void sparkbot::stopBuzzer()
 int sparkbot::moveCloud(String data)
 {
   String neckvalue = data.substring(0, 3);
-  String rightvalue = data.substring(4, 7);
-  String leftvalue = data.substring(8,11);
+  String leftvalue = data.substring(4, 7);
+  String rightvalue = data.substring(8,11);
 
   if (neckvalue.toInt() != 200)
   {
     moveNeck(neckvalue.toInt());
   }
-  if (rightvalue.toInt() != 200)
-  {
-    moveRight(rightvalue.toInt());
-  }
+
   if (leftvalue.toInt() != 200)
   {
     moveLeft(leftvalue.toInt());
   }
 
+  if (rightvalue.toInt() != 200)
+  {
+    moveRight(rightvalue.toInt());
+  }
+
   Serial.println("Original String: " + data);
   Serial.println("Neck: " + String(neckvalue.toInt()));
-  Serial.println("Right: " + String(rightvalue.toInt()));
   Serial.println("Left: " + String(leftvalue.toInt()));
+  Serial.println("Right: " + String(rightvalue.toInt()));
   return 1;
 }
 
@@ -336,8 +337,8 @@ void sparkbot::syncServosSlave(const char *event, const char *data)
   String message = String(data);
 
   String neckresult = message.substring(0, 3);
-  String rightresult = message.substring(3, 6);
-  String leftresult = message.substring(6,9);
+  String leftresult = message.substring(3, 6);
+  String rightresult = message.substring(6,9);
 
   bool moveNeck = false;
   bool moveRight = false;
@@ -348,14 +349,14 @@ void sparkbot::syncServosSlave(const char *event, const char *data)
     moveNeck = true;
   }
 
-  if (rightresult.toInt() >= 0 && rightresult.toInt() <= 180)
-  {
-    moveRight = true;
-  }
-
   if (leftresult.toInt() >= 0 && leftresult.toInt() <= 180)
   {
     moveLeft = true;
+  }
+
+  if (rightresult.toInt() >= 0 && rightresult.toInt() <= 180)
+  {
+    moveRight = true;
   }
 
 
@@ -364,15 +365,16 @@ void sparkbot::syncServosSlave(const char *event, const char *data)
     sparkbot::moveNeck(neckresult.toInt());
   }
 
+  if (moveLeft == true)
+  {
+    sparkbot::moveLeft(leftresult.toInt());
+  }
+
   if (moveRight == true)
   {
     sparkbot::moveRight(rightresult.toInt());
   }
 
-  if (moveLeft == true)
-  {
-    sparkbot::moveLeft(leftresult.toInt());
-  }
 }
 
 void sparkbot::RGBSlave(const char *event, const char *data)
