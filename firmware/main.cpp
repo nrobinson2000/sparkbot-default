@@ -6,6 +6,7 @@
 #include "sparkbot-default.h" // Import the sparkbot-default library.
 SYSTEM_THREAD(ENABLED);
 SYSTEM_MODE(SEMI_AUTOMATIC);
+STARTUP(setup());
 
 
 sparkbot sb; // Create sb, an object of the sparkbot class.
@@ -31,12 +32,12 @@ void setup() // Mandatory setup function.
   Particle.connect();
   sb.begin();
   interrupts();
+
   Particle.subscribe("syncServos", &syncServosHandler, MY_DEVICES);
   Particle.subscribe("RGB", &RGBSlaveHandler, MY_DEVICES);
 
-
-  // This initializes the SparkBot.
-            //It starts all the pins, servos, cloud variables, functions and subscriptions.
+// This initializes the SparkBot.
+//It starts all the pins, servos, cloud variables, functions and subscriptions.
 
 /////Start other SparkBot processes below./////
 
@@ -58,38 +59,25 @@ void setup() // Mandatory setup function.
 "leftArm", returns the leftArmAngle LEFTSERVO
 "brightness", returns the brightness of PHOTORESISTOR
 
-"onlineBots", returns the number of online SparkBots, checkOnline() must be called first to update the number.
 
 <FUNCTIONS>
 
-"moveNeck", Calls moveNeckCloud(int), integer from 0-180
-"moveRight", Calls moveRightCloud(int), integer from 0-180
-"moveLeft", Calls moveLeftCloud(int), integer from 0-180
-"moodlights", Calls moodlightsCloud(red, green, blue), 3 RGB values from 0-255
-
-"checkOnline", Calls the checkOnline function, which updates "onlineBots".
+"moveServos", Calls moveCloud(String data), where data is a string containing values from 000-180 for the neck, left, and right servos.
+"moodlights", Calls moodlightsCloud(String data), where data is a string containing values from 000-255 for the red, green, and blue LEDs.
+"enableSlave", Toggles slave mode, which makes the robot mimic another.
 
 */
   sb.moveNeck(90);
   sb.moveLeft(90);
   sb.moveRight(90);
+
   pinMode(I0, OUTPUT);
   pinMode(I4, INPUT);
 
   Serial1.println("Hello");
 }
 
-
 void loop() // Mandatory loop function.
 {
-  sb.refresh();
-
-  if (digitalRead(I4) == HIGH)
-  {
-      Serial.println("Button pressed!");
-      webhookHandler();
-      delay(250);
-  }
-
-
+  sb.refresh();  
 }

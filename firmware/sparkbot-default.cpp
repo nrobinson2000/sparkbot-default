@@ -48,6 +48,7 @@ void sparkbot::begin()
 
   auto slaveHandler = std::bind(&sparkbot::slaveToggle, this, std::placeholders::_1);
   Particle.function("enableSlave", slaveHandler);
+  
   Serial.begin(9600);
   Serial1.begin(9600);
 }
