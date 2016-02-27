@@ -17,7 +17,7 @@ public:
   #define RIGHTBUTTON D7    //<photon pins>
   #define LEFTBUTTON D6           //
                                   //
-  // #define REDLED D3               //
+  #define LED D3               //
   // #define BLUELED A7              //
   // #define GREENLED TX             //
                                   //
@@ -97,8 +97,9 @@ public:
 
   void command(const char *data);
   String readData();
-  String askNeck();
-  String askLeft();
-  String askRight();
+
+  int askNeck();
+  int askLeft();
+  int askRight();
 };
 #endif

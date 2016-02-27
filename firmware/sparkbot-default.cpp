@@ -24,6 +24,7 @@ void sparkbot::begin()
   pinMode(PHOTORESISTOR, INPUT);
   pinMode(MICROPHONE, INPUT);
   pinMode(BUZZER, OUTPUT);
+  pinMode(LED, OUTPUT);
 
 /*
   neckservo.write(90); // Reset servos and read the values.
@@ -48,7 +49,7 @@ void sparkbot::begin()
 
   auto slaveHandler = std::bind(&sparkbot::slaveToggle, this, std::placeholders::_1);
   Particle.function("enableSlave", slaveHandler);
-  
+
   Serial.begin(9600);
   Serial1.begin(9600);
 }
@@ -153,9 +154,9 @@ void sparkbot::syncServos()
   String leftdata = String("");
   String rightdata = String("");
 
-  String neckString = askNeck();
-  String leftString = askLeft();
-  String rightString = askRight();
+  String neckString = String(askNeck());
+  String leftString = String(askLeft());
+  String rightString = String(askRight());
 
   int neck = neckString.toInt();
   int left = leftString.toInt();
@@ -444,20 +445,23 @@ String sparkbot::readData()
   }
 }
 
-String sparkbot::askNeck()
+int sparkbot::askNeck()
 {
 command("neck");
-return readData();
+delay(50);
+return readData().toInt();
 }
 
-String sparkbot::askLeft()
+int sparkbot::askLeft()
 {
 command("left");
-return readData();
+delay(50);
+return readData().toInt();
 }
 
-String sparkbot::askRight()
+int sparkbot::askRight()
 {
   command("right");
-  return readData();
+  delay(50);
+  return readData().toInt();
 }

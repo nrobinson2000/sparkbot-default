@@ -7,7 +7,7 @@
 SYSTEM_THREAD(ENABLED);
 SYSTEM_MODE(SEMI_AUTOMATIC);
 STARTUP(setup());
-
+String readString;
 
 sparkbot sb; // Create sb, an object of the sparkbot class.
 
@@ -74,10 +74,78 @@ void setup() // Mandatory setup function.
   pinMode(I0, OUTPUT);
   pinMode(I4, INPUT);
 
-  Serial1.println("Hello");
+}
+
+void parseCommand(String cmd)
+{
+  Serial.println(cmd);
+// servos 000 000 000
+  if (cmd.startsWith("servos"))
+  {
+    sb.neckAngle = cmd.substring(7,10).toInt();
+    sb.leftArmAngle = cmd.substring(11,14).toInt();
+    sb.rightArmAngle = cmd.substring(15,18).toInt();
+  }
+
+  if (cmd.startsWith("neck"))
+  {
+    sb.neckAngle = cmd.substring(5).toInt();
+  }
+
+  if (cmd.startsWith("left"))
+  {
+    sb.leftArmAngle = cmd.substring(5).toInt();
+  }
+
+  if (cmd.startsWith("right"))
+  {
+    sb.rightArmAngle = cmd.substring(6).toInt();
+  }
 }
 
 void loop() // Mandatory loop function.
 {
   sb.refresh();
+  Serial.println(sb.noiseLevel);
+  if (sb.noiseLevel > 600)
+  {
+    digitalWrite(LED, HIGH);
+  }
+  else
+  {
+    digitalWrite(LED, LOW);
+  }
+
+// sb.playBuzzer(250);
+
+/*
+  sb.command("servos");
+  while (Serial1.available())
+  {
+    delay(3);
+    char c = Serial.read();
+    readString += c;
+  }
+
+  readString.trim();
+
+  if (readString.length() > 0)
+  {
+    parseCommand(readString);
+
+    readString = "";
+  }
+
+if (millis() % 2000 == 0)
+  {
+  if (sb.neckAngle > 100)
+    {
+      digitalWrite(LED, HIGH);
+    }
+  else
+    {
+      digitalWrite(LED, LOW);
+    }
+  }*/
+
 }
