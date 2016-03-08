@@ -106,8 +106,8 @@ void parseCommand(String cmd)
 void loop() // Mandatory loop function.
 {
   sb.refresh();
-  Serial.println(sb.noiseLevel);
-  if (sb.noiseLevel > 600)
+//  Serial.println(sb.noiseLevel);
+/*  if (sb.noiseLevel > 600)
   {
     digitalWrite(LED, HIGH);
   }
@@ -115,7 +115,7 @@ void loop() // Mandatory loop function.
   {
     digitalWrite(LED, LOW);
   }
-
+*/
 // sb.playBuzzer(250);
 
 /*
