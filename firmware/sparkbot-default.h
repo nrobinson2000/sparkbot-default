@@ -78,6 +78,7 @@ public:
 
   void playBuzzer(int value);
   void stopBuzzer();
+  int soundCloud(String data);
 
   void syncServosSlave(const char *event, const char *data);
   void RGBSlave(const char *event, const char *data);

@@ -50,6 +50,9 @@ void sparkbot::begin()
   auto slaveHandler = std::bind(&sparkbot::slaveToggle, this, std::placeholders::_1);
   Particle.function("enableSlave", slaveHandler);
 
+  auto soundHandler = std::bind(&sparkbot::soundCloud, this, std::placeholders::_1);
+  Particle.function("playSound", soundHandler);
+
   Serial.begin(9600);
   Serial1.begin(9600);
 }
@@ -284,6 +287,12 @@ void sparkbot::playBuzzer(int value)
 void sparkbot::stopBuzzer()
 {
   analogWrite(BUZZER, 0);
+}
+
+int sparkbot::soundCloud(String data)
+{
+  playBuzzer(data.toInt());
+  return 1;
 }
 
 int sparkbot::moveCloud(String data)
