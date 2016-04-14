@@ -14,37 +14,32 @@ public:
 
   sparkbot();
 
-  #define RIGHTBUTTON D7    //<photon pins>
-  #define LEFTBUTTON D6           //
-                                  //
-  #define LED D3               //
-  // #define BLUELED A7              //
-  // #define GREENLED TX             //
-                                  //
-  #define PHOTORESISTOR A0        //
-  #define MICROPHONE A3           //
-  #define BUZZER D0               //
-                                  //
-  #define I0 A4                   //
-  #define I1 A5                   //
-  #define I2 A6                   //
-  #define I3 A1                   //
-  #define I4 A2                   //
-  #define I5 D5                   //
-  #define I6 D4                   //
-                                  //
-  //                                 //
-  // #define RIGHTSERVO D0           //
-  // #define LEFTSERVO D1            //
-  // #define NECKSERVO D2      //</photon pins>
+  // <photon pins>
+  #define RIGHTBUTTON D7
+  #define LEFTBUTTON D6
 
+  #define LED D3
 
-  int neckAngle;            //<variables>
-  int rightArmAngle;              //
-  int leftArmAngle;               //
-                                  //
-  int brightness;                 //
-                                  //
+  #define PHOTORESISTOR A0
+  #define MICROPHONE A3
+  #define BUZZER D0
+
+  #define I0 A4
+  #define I1 A5
+  #define I2 A6
+  #define I3 A1
+  #define I4 A2
+  #define I5 D5
+  #define I6 D4
+  // </photon pins>
+
+  // <variables>
+  int neckAngle;
+  int rightArmAngle;
+  int leftArmAngle;
+
+  int brightness;
+
   int redValue;                   //
   int greenValue;                 //
   int blueValue;                  //
@@ -52,8 +47,8 @@ public:
   int choice;                     //
   int noiseLevel;           //</variables>
 
-
   bool slaveMode;
+  // </variables>
 
   int moveWrapper(String data);
 
