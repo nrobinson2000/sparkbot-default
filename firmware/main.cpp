@@ -36,41 +36,10 @@ void setup() // Mandatory setup function.
   Particle.subscribe("syncServos", &syncServosHandler, MY_DEVICES);
   Particle.subscribe("RGB", &RGBSlaveHandler, MY_DEVICES);
 
-// This initializes the SparkBot.
-//It starts all the pins, servos, cloud variables, functions and subscriptions.
-
-/////Start other SparkBot processes below./////
-
-// sb.initSlave(); // Configure this SparkBot as a slave bot.
-
-// sb.sync(); // Master sync command.  Sync other slave bots to the settings of this SparkBot.
-
-// sb.startLeftButton(); // Start the light switching process.
-
-// sb.startRightButton(); // Start the Master bot process.
-
-
-/*///CLOUD FUNCTIONS AND VARIABLES/////
-
-<VARIABLES>
-
-"neck", returns the neckAngle of NECKSERVO
-"rightArm", returns the rightArmAngle of RIGHTSERVO
-"leftArm", returns the leftArmAngle LEFTSERVO
-"brightness", returns the brightness of PHOTORESISTOR
-
-
-<FUNCTIONS>
-
-"moveServos", Calls moveCloud(String data), where data is a string containing values from 000-180 for the neck, left, and right servos.
-"moodlights", Calls moodlightsCloud(String data), where data is a string containing values from 000-255 for the red, green, and blue LEDs.
-"enableSlave", Toggles slave mode, which makes the robot mimic another.
-
-*/
   sb.moveNeck(90);
   sb.moveLeft(90);
   sb.moveRight(90);
-
+  sb.moodlights(0, 0, 0);
   pinMode(I0, OUTPUT);
   pinMode(I4, INPUT);
 
@@ -79,7 +48,6 @@ void setup() // Mandatory setup function.
 void parseCommand(String cmd)
 {
   Serial.println(cmd);
-// servos 000 000 000
   if (cmd.startsWith("servos"))
   {
     sb.neckAngle = cmd.substring(7,10).toInt();
@@ -106,46 +74,5 @@ void parseCommand(String cmd)
 void loop() // Mandatory loop function.
 {
   sb.refresh();
-//  Serial.println(sb.noiseLevel);
-/*  if (sb.noiseLevel > 600)
-  {
-    digitalWrite(LED, HIGH);
-  }
-  else
-  {
-    digitalWrite(LED, LOW);
-  }
-*/
-// sb.playBuzzer(250);
-
-/*
-  sb.command("servos");
-  while (Serial1.available())
-  {
-    delay(3);
-    char c = Serial.read();
-    readString += c;
-  }
-
-  readString.trim();
-
-  if (readString.length() > 0)
-  {
-    parseCommand(readString);
-
-    readString = "";
-  }
-
-if (millis() % 2000 == 0)
-  {
-  if (sb.neckAngle > 100)
-    {
-      digitalWrite(LED, HIGH);
-    }
-  else
-    {
-      digitalWrite(LED, LOW);
-    }
-  }*/
 
 }

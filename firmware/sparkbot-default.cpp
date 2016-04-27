@@ -124,7 +124,7 @@ int sparkbot::moodlightsCloud(String data)
 
 void sparkbot::moodlights(int red, int green, int blue)
 {
-    command("rgb " + String(red) + " " + String(green) + " " + String(blue));
+    command("rgb " + makeProper(red) + " " + makeProper(green) + " " + makeProper(blue));
     redValue = red;
     greenValue = green;
     blueValue = blue;
