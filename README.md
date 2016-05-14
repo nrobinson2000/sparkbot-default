@@ -38,4 +38,4 @@ I have built an app for using my product.  The app is avaliable at [http://nrobi
     "moodlights", must be a string like this "RRR GGG BBB", writes values to the moodlights.
     "enableSlave", toggles whether or not this is a slave bot
     
-    <center>[![](https://projecthandup.org/wp-content/uploads/2013/01/RibbonDonateBitcoin.png)](https://nrobinson2000.github.io/donate-bitcoin/)</center>
+<center>[![](https://projecthandup.org/wp-content/uploads/2013/01/RibbonDonateBitcoin.png)](https://nrobinson2000.github.io/donate-bitcoin/)</center>
